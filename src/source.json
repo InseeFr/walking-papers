@@ -1,0 +1,278 @@
+{
+  "id": "ma0nzzmj",
+  "label": { "type": "VTL|MD", "value": "[mn]: Zoo de Chloé " },
+  "modele": "ZOOCHLOE",
+  "maxPage": "5",
+  "cleaning": {
+    "FAUTILLIBR": {
+      "FAUTILLIBR4CL": [
+        { "expression": "FAUTILLIBR = \"4\"", "isAggregatorUsed": false }
+      ]
+    }
+  },
+  "resizing": {},
+  "variables": [
+    {
+      "name": "TEST_CALC",
+      "dimension": 0,
+      "expression": { "type": "VTL", "value": "nvl($CHOIXMULTIT6$, \"\")" },
+      "variableType": "CALCULATED"
+    },
+    {
+      "name": "TEST_EXT",
+      "value": null,
+      "dimension": 0,
+      "variableType": "EXTERNAL"
+    },
+    {
+      "name": "qsdfqsdqsqd",
+      "value": null,
+      "dimension": 0,
+      "variableType": "EXTERNAL"
+    },
+    {
+      "name": "QUESTION",
+      "values": { "COLLECTED": null },
+      "dimension": 0,
+      "variableType": "COLLECTED"
+    },
+    {
+      "name": "AIMEZVOUSL",
+      "values": { "COLLECTED": null },
+      "dimension": 0,
+      "variableType": "COLLECTED"
+    },
+    {
+      "name": "FAUTILLIBR",
+      "values": { "COLLECTED": null },
+      "dimension": 0,
+      "variableType": "COLLECTED"
+    },
+    {
+      "name": "FAUTILLIBR4CL",
+      "values": { "COLLECTED": null },
+      "dimension": 0,
+      "variableType": "COLLECTED"
+    },
+    {
+      "name": "UNCOMMENTA",
+      "values": { "COLLECTED": null },
+      "dimension": 0,
+      "variableType": "COLLECTED"
+    },
+    {
+      "name": "FILTER_RESULT_QUESTION",
+      "dimension": 0,
+      "expression": { "type": "VTL", "value": "true" },
+      "variableType": "CALCULATED",
+      "isIgnoredByLunatic": true
+    },
+    {
+      "name": "FILTER_RESULT_AIMEZVOUSL",
+      "dimension": 0,
+      "expression": { "type": "VTL", "value": "true" },
+      "variableType": "CALCULATED",
+      "isIgnoredByLunatic": true
+    },
+    {
+      "name": "FILTER_RESULT_FAUTILLIBR",
+      "dimension": 0,
+      "expression": { "type": "VTL", "value": "true" },
+      "variableType": "CALCULATED",
+      "isIgnoredByLunatic": true
+    },
+    {
+      "name": "FILTER_RESULT_UNCOMMENTA",
+      "dimension": 0,
+      "expression": { "type": "VTL", "value": "true" },
+      "variableType": "CALCULATED",
+      "isIgnoredByLunatic": true
+    }
+  ],
+  "components": [
+    {
+      "id": "m7c64mrn",
+      "page": "1",
+      "label": { "type": "VTL", "value": "\"I - \" || \"S1\"" },
+      "componentType": "Sequence",
+      "conditionFilter": { "type": "VTL", "value": "true" }
+    },
+    {
+      "id": "question-m7c61ohr",
+      "page": "2",
+      "label": {
+        "type": "VTL|MD",
+        "value": "\"Aimez vous le métro de Mathieu ?\""
+      },
+      "components": [
+        {
+          "id": "m7c61ohr",
+          "page": "2",
+          "options": [
+            {
+              "label": { "type": "VTL|MD", "value": "\"Oui !!!\"" },
+              "value": "1"
+            },
+            {
+              "label": { "type": "VTL|MD", "value": "\"Peut-être\"" },
+              "value": "3"
+            },
+            {
+              "label": { "type": "VTL|MD", "value": "\"Autre\"" },
+              "value": "4"
+            }
+          ],
+          "controls": [
+            {
+              "id": "m7c61ohr-CI-0",
+              "type": "SIMPLE",
+              "control": { "type": "VTL", "value": "not(QUESTION = \"F\")" },
+              "criticality": "WARN",
+              "errorMessage": {
+                "type": "VTL|MD",
+                "value": "\"F c'est pas bien \""
+              },
+              "typeOfControl": "CONSISTENCY"
+            }
+          ],
+          "response": { "name": "QUESTION" },
+          "isMandatory": false,
+          "orientation": "vertical",
+          "componentType": "Radio"
+        }
+      ],
+      "componentType": "Question",
+      "conditionFilter": { "type": "VTL", "value": "true" }
+    },
+    {
+      "id": "question-ma0o6j27",
+      "page": "3",
+      "label": {
+        "type": "VTL|MD",
+        "value": "\"Aimez vous le zoo de chloé ?\""
+      },
+      "components": [
+        {
+          "id": "ma0o6j27",
+          "page": "3",
+          "options": [
+            {
+              "label": { "type": "VTL|MD", "value": "\"Oui !!!\"" },
+              "value": "1"
+            },
+            {
+              "label": { "type": "VTL|MD", "value": "\"Peut-être\"" },
+              "value": "3"
+            },
+            {
+              "label": { "type": "VTL|MD", "value": "\"Autre\"" },
+              "value": "4"
+            }
+          ],
+          "response": { "name": "AIMEZVOUSL" },
+          "isMandatory": false,
+          "orientation": "vertical",
+          "componentType": "Radio"
+        }
+      ],
+      "componentType": "Question",
+      "conditionFilter": { "type": "VTL", "value": "true" }
+    },
+    {
+      "id": "question-ma0nyqmn",
+      "page": "4",
+      "label": { "type": "VTL|MD", "value": "\"Faut il libérer les animaux\"" },
+      "components": [
+        {
+          "id": "ma0nyqmn",
+          "page": "4",
+          "options": [
+            {
+              "label": { "type": "VTL|MD", "value": "\"Oui !!!\"" },
+              "value": "1"
+            },
+            {
+              "label": { "type": "VTL|MD", "value": "\"Peut-être\"" },
+              "value": "3"
+            },
+            {
+              "label": { "type": "VTL|MD", "value": "\"Autre\"" },
+              "value": "4",
+              "detail": {
+                "label": { "type": "VTL|MD", "value": "Préciser :" },
+                "response": { "name": "FAUTILLIBR4CL" },
+                "maxLength": 249
+              }
+            }
+          ],
+          "response": { "name": "FAUTILLIBR" },
+          "isMandatory": false,
+          "orientation": "vertical",
+          "componentType": "Radio"
+        }
+      ],
+      "componentType": "Question",
+      "conditionFilter": { "type": "VTL", "value": "true" }
+    },
+    {
+      "id": "question-ma0ofcqg",
+      "page": "5",
+      "label": { "type": "VTL|MD", "value": "\"Un commentaire ? \"" },
+      "components": [
+        {
+          "id": "ma0ofcqg",
+          "page": "5",
+          "response": { "name": "UNCOMMENTA" },
+          "maxLength": 249,
+          "isMandatory": false,
+          "componentType": "Input"
+        }
+      ],
+      "componentType": "Question",
+      "conditionFilter": { "type": "VTL", "value": "true" }
+    }
+  ],
+  "pagination": "question",
+  "suggesters": [
+    {
+      "name": "L_PRODEAP_GAZ_2024",
+      "fields": [
+        {
+          "min": 3,
+          "name": "id",
+          "rules": ["[\\w]+"],
+          "stemmer": false,
+          "language": "French"
+        },
+        {
+          "min": 3,
+          "name": "label",
+          "rules": ["[\\w]+"],
+          "stemmer": false,
+          "language": "French"
+        },
+        {
+          "min": 3,
+          "name": "nc",
+          "rules": ["[\\w]+"],
+          "stemmer": false,
+          "language": "French"
+        }
+      ],
+      "version": 1,
+      "queryParser": {
+        "type": "tokenized",
+        "params": {
+          "min": 3,
+          "pattern": "[\\w.]+",
+          "stemmer": false,
+          "language": "French"
+        }
+      }
+    }
+  ],
+  "componentType": "Questionnaire",
+  "enoCoreVersion": "3.54.0",
+  "generatingDate": "16-07-2025 14:24:06",
+  "lunaticModelVersion": "5.7.0"
+}
