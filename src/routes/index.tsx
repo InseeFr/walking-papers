@@ -1,3 +1,4 @@
+import type { LunaticSource } from '@inseefr/lunatic'
 import { createFileRoute } from '@tanstack/react-router'
 
 import Orchestrator from '@/features/orchestrator/Orchestrator'
@@ -9,5 +10,5 @@ export const Route = createFileRoute('/')({
 })
 
 function Index() {
-  return <Orchestrator source={source} />
+  return <Orchestrator source={source as LunaticSource} />
 }
