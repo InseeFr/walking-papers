@@ -24,6 +24,7 @@ export default function Orchestrator({ source, data }: Readonly<Props>) {
     getData,
     isFirstPage,
     isLastPage,
+    pageTag,
     Provider: LunaticProvider,
   } = useLunatic(source, data, {
     disableFilters: true,
@@ -44,7 +45,7 @@ export default function Orchestrator({ source, data }: Readonly<Props>) {
   return (
     <LunaticProvider>
       <div className="p-3">
-        <LunaticComponents components={components} />
+        <LunaticComponents components={components} autoFocusKey={pageTag} />
       </div>
       <div className="p-6">
         <Navigation
