@@ -1,6 +1,37 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended"
+  "extends": ["config:recommended"],
+  "packageRules": [
+    {
+      "matchPaths": ["package.json"],
+      "matchDepTypes": ["dependencies"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "dependencies minor and patch updates",
+      "groupSlug": "minor-patch",
+      "labels": ["dependencies"]
+    },
+    {
+      "matchPaths": ["package.json"],
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "devDependencies minor and patch updates",
+      "groupSlug": "dev-minor-patch",
+      "labels": ["devDependencies"]
+    },
+    {
+      "matchPaths": ["package.json"],
+      "matchDepTypes": ["dependencies"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "lunatic",
+      "groupSlug": "lunatic",
+      "matchPackagePatterns": ["@inseefr/lunatic.*"],
+      "labels": ["lunatic"],
+      "bumpVersion": "minor",
+      "dependencyDashboardApproval": true
+    },
+    {
+      "matchPaths": [".github/workflows/**", "ci/**"],
+      "labels": ["CI"]
+    }
   ]
 }
