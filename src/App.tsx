@@ -1,6 +1,8 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { RouterProvider, createRouter } from '@tanstack/react-router'
 
+import { OidcProvider } from '@/oidc'
+
 import './libs/i18n'
 import { routeTree } from './routeTree.gen'
 
@@ -25,7 +27,9 @@ const router = createRouter({ routeTree, context: { queryClient } })
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
+      <OidcProvider>
+        <RouterProvider router={router} />
+      </OidcProvider>
     </QueryClientProvider>
   )
 }

@@ -8,12 +8,14 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+generate-api-client/
 dist
 dist-ssr
 *.local
 
 # Editor directories and files
 .vscode/*
+.tanstack/
 !.vscode/extensions.json
 .idea
 .DS_Store

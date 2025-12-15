@@ -11,6 +11,9 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "_format": "prettier --ignore-unknown .",
+    "format": "npm run _format -- --write",
+    "format:check": "npm run _format -- --list-different",
     "prepare": "husky"
   },
   "dependencies": {
@@ -22,6 +25,7 @@
     "axios": "^1.13.1",
     "i18next": "^25.3.2",
     "i18next-browser-languagedetector": "^8.2.0",
+    "oidc-spa": "^8.6.17",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-i18next": "^15.6.0",
@@ -47,6 +51,7 @@
     "jsdom": "^27.0.0",
     "lint-staged": "^16.1.2",
     "nock": "^14.0.5",
+    "orval": "^7.17.0",
     "prettier": "3.6.2",
     "typescript": "~5.9.0",
     "typescript-eslint": "^8.35.1",

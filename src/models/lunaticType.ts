@@ -1,7 +1,4 @@
-import {
-  type LunaticOptions,
-  type LunaticSource
-} from '@inseefr/lunatic'
+import { type LunaticOptions, type LunaticSource } from '@inseefr/lunatic'
 
 export type LunaticGetReferentiel = LunaticOptions['getReferentiel']
 

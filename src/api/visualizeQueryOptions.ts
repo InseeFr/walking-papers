@@ -1,5 +1,6 @@
 import { queryOptions } from '@tanstack/react-query'
 import axios, { type AxiosRequestConfig } from 'axios'
+
 import type { Nomenclature, Source } from '@/models/lunaticType'
 
 function axiosGet<T>(url: string, options?: AxiosRequestConfig) {
@@ -14,7 +15,6 @@ export const sourceQueryOptions = (
     queryKey: [sourceUrl],
     queryFn: () => axiosGet<Source>(sourceUrl, options),
   })
-
 
 export const nomenclatureQueryOptions = (
   nomenclatureUrl: string,
