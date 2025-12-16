@@ -20,16 +20,18 @@ describe('Navigation', () => {
     expect(bar).toHaveBeenCalledOnce()
   })
 
-  it('show validate label on last page', async () => {
+  it('shows validate data on validation page', async () => {
     const user = userEvent.setup()
     const foo = vi.fn()
     const { getByRole } = renderWithI18n(
-      <Navigation onNext={foo} onPrevious={vi.fn()} isLastPage />,
+      <Navigation
+        onNext={foo}
+        onPrevious={vi.fn()}
+        currentPageType="validationPage"
+      />,
     )
-
-    expect(getByRole('button', { name: /Validate data/i })).toBeEnabled()
-
-    await user.click(getByRole('button', { name: /Validate data/i }))
+    expect(getByRole('button', { name: /Validate Data/i })).toBeInTheDocument()
+    await user.click(getByRole('button', { name: /Validate Data/i }))
     expect(foo).toHaveBeenCalledOnce()
   })
 

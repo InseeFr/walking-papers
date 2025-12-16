@@ -7,6 +7,7 @@ import {
   useLunatic,
 } from '@inseefr/lunatic'
 import '@inseefr/lunatic/main.css'
+import { assert } from 'tsafe/assert'
 
 import type { Interrogation } from '@/models/interrogation'
 import type { InterrogationData } from '@/models/interrogationData'
@@ -19,6 +20,7 @@ import DataDownload from './DataDownload'
 import Navigation from './Navigation'
 import { EndPage } from './customPages/EndPage'
 import { ValidationPage } from './customPages/ValidationPage'
+import { WelcomePage } from './customPages/WelcomePage'
 import {
   computeInterrogation,
   trimCollectedData,
@@ -188,6 +190,7 @@ export default function Orchestrator(props: OrchestratorProps) {
     <LunaticProvider>
       <div ref={containerRef}>
         <div className="p-3">
+          {currentPageType === PAGE_TYPE.WELCOME && <WelcomePage />}
           {currentPageType === PAGE_TYPE.LUNATIC && (
             <LunaticComponents components={components} autoFocusKey={pageTag} />
           )}
@@ -200,8 +203,8 @@ export default function Orchestrator(props: OrchestratorProps) {
           <Navigation
             onNext={goNext}
             onPrevious={goPrevious}
+            currentPageType={currentPageType}
             isFirstPage={isFirstPage}
-            isLastPage={isLastPage}
           />
         </div>
         <div className="p-6">

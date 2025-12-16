@@ -8,10 +8,14 @@
   },
   "endPage": {
     "title": "End Page",
-    "paragraph": "You have completed the data entry for this questionnaire. You can now close this application. Thank you for your participation!"
+    "paragraph": "This is the end page."
   },
   "validationPage": {
     "title": "Validation Page",
-    "paragraph": "You are about to validate the entered data. Please ensure that all information is correct before proceeding with the final validation."
+    "paragraph": "This is the validation page."
+  },
+  "welcomePage": {
+    "title": "Welcome Page",
+    "paragraph": "This is the welcome page."
   }
 }
