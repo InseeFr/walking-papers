@@ -20,17 +20,17 @@ describe('Navigation', () => {
     expect(bar).toHaveBeenCalledOnce()
   })
 
-  it('disable next on last page', async () => {
+  it('show validate label on last page', async () => {
     const user = userEvent.setup()
     const foo = vi.fn()
     const { getByRole } = renderWithI18n(
       <Navigation onNext={foo} onPrevious={vi.fn()} isLastPage />,
     )
 
-    expect(getByRole('button', { name: /Next/i })).toBeDisabled()
+    expect(getByRole('button', { name: /Validate data/i })).toBeEnabled()
 
-    await user.click(getByRole('button', { name: /Next/i }))
-    expect(foo).not.toHaveBeenCalledOnce()
+    await user.click(getByRole('button', { name: /Validate data/i }))
+    expect(foo).toHaveBeenCalledOnce()
   })
 
   it('disable previous on first page', async () => {

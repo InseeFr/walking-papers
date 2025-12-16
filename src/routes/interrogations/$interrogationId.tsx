@@ -1,5 +1,5 @@
+import type { LunaticSource } from '@inseefr/lunatic'
 import { createFileRoute } from '@tanstack/react-router'
-import type { LunaticSource } from 'node_modules/@inseefr/lunatic/use-lunatic/type'
 
 import { getGetQuestionnaireDataQueryOptions } from '@/api/03-questionnaires'
 import { getInterrogationById } from '@/api/06-interrogations'
