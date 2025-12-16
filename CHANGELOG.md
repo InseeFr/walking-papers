@@ -10,5 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Initialized project
-- One can test out the application with an arbitrary Lunatic source
-- A "download data" button allows to test out the data inputted by the user
+- Test out the application with an arbitrary Lunatic source
+- Visualize empty questionnaire
+- Fill questionnaire and send data to server
+- Download inputted data as JSON file

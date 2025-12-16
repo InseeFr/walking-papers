@@ -19,4 +19,10 @@ export default defineConfig({
     }),
     tailwindcss(),
   ],
+  optimizeDeps: {
+    include: ['void-elements'],
+  },
+  ssr: {
+    noExternal: ['void-elements'],
+  },
 })

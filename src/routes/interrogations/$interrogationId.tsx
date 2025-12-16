@@ -1,13 +1,12 @@
 import { createFileRoute } from '@tanstack/react-router'
-
-
-import { protectedRouteLoader } from '@/loader/protectedLoader'
-import type { Interrogation } from '@/models/api/interrogation'
-import { getInterrogationById } from '@/api/06-interrogations'
 import type { LunaticSource } from 'node_modules/@inseefr/lunatic/use-lunatic/type'
+
 import { getGetQuestionnaireDataQueryOptions } from '@/api/03-questionnaires'
+import { getInterrogationById } from '@/api/06-interrogations'
 import ErrorPage from '@/components/ErrorPage'
 import { InterrogationPage } from '@/features/interrogation/InterrogationPage'
+import { protectedRouteLoader } from '@/loader/protectedLoader'
+import type { Interrogation } from '@/models/interrogation'
 
 export const Route = createFileRoute('/interrogations/$interrogationId')({
   beforeLoad: async () => protectedRouteLoader(),
@@ -47,8 +46,13 @@ export const Route = createFileRoute('/interrogations/$interrogationId')({
     }
   },
   errorComponent: ({ error }) => {
-    return <ErrorPage error={error} reset={function (): void {
-      throw new Error('Function not implemented.')
-    }} />
+    return (
+      <ErrorPage
+        error={error}
+        reset={function (): void {
+          throw new Error('Function not implemented.')
+        }}
+      />
+    )
   },
 })

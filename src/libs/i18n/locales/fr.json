@@ -1,6 +1,17 @@
 {
-  "appName": "Orchestrateur de saisie papier",
-  "downloadData": "Télécharger les données",
-  "next": "Suivant",
-  "previous": "Précédent"
+  "common": {
+    "appName": "Orchestrateur de saisie papier",
+    "downloadData": "Télécharger les données",
+    "next": "Suivant",
+    "validateData": "Valider les données saisies",
+    "previous": "Précédent"
+  },
+  "endPage": {
+    "title": "Fin de la saisie",
+    "paragraph": "Vous avez terminé la saisie de ce questionnaire. Vous pouvez désormais fermer cette application. Merci pour votre participation !"
+  },
+  "validationPage": {
+    "title": "Validation des données saisies",
+    "paragraph": "Vous êtes sur le point de valider les données saisies. Veuillez vérifier que toutes les informations sont correctes avant de procéder à la validation finale."
+  }
 }

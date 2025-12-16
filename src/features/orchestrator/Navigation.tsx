@@ -26,14 +26,10 @@ export default function Navigation({
         disabled={isFirstPage}
         IconLeft={<ArrowLeftIcon />}
       >
-        {t('previous')}
+        {t('common.previous')}
       </Button>
-      <Button
-        onClick={onNext}
-        disabled={isLastPage}
-        IconRight={<ArrowRightIcon />}
-      >
-        {t('next')}
+      <Button onClick={onNext} IconRight={<ArrowRightIcon />}>
+        {isLastPage ? t('common.validateData') : t('common.next')}
       </Button>
     </div>
   )

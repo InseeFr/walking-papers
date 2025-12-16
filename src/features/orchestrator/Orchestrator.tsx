@@ -1,3 +1,5 @@
+import { useEffect, useRef, useState } from 'react'
+
 import {
   LunaticComponents,
   type LunaticData,
@@ -6,26 +8,28 @@ import {
 } from '@inseefr/lunatic'
 import '@inseefr/lunatic/main.css'
 
+import type { Interrogation } from '@/models/interrogation'
+import type { InterrogationData } from '@/models/interrogationData'
 import type { LunaticGetReferentiel } from '@/models/lunaticType'
+import { MODE_TYPE } from '@/models/mode'
+import { PAGE_TYPE } from '@/models/pageType'
+import type { StateData } from '@/models/stateData'
 
 import DataDownload from './DataDownload'
 import Navigation from './Navigation'
-import type { StateData } from '@/models/stateData'
-import { PAGE_TYPE } from '@/models/pageType'
-import type { Interrogation } from '@/models/api/interrogation'
-import { MODE_TYPE } from '@/models/mode'
+import { EndPage } from './customPages/EndPage'
+import { ValidationPage } from './customPages/ValidationPage'
+import {
+  computeInterrogation,
+  trimCollectedData,
+} from './hooks/interrogationUtils'
 import { useInterrogation } from './hooks/useInterrogation'
+import { useNavigation } from './hooks/useNavigation'
+import { useUpdateEffect } from './hooks/useUpdateEffect'
 import { hasBeenSent } from './utils/orchestrator'
-import type { InterrogationData } from '@/models/interrogationData'
-import { computeInterrogation, hasDataChanged, trimCollectedData } from './hooks/interrogationUtils'
-import { useState } from 'react'
-
 
 export type OrchestratorProps = OrchestratorProps.Common &
-  (
-    | OrchestratorProps.Visualize
-    | OrchestratorProps.Collect
-  )
+  (OrchestratorProps.Visualize | OrchestratorProps.Collect)
 
 // eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace OrchestratorProps {
@@ -51,19 +55,28 @@ export namespace OrchestratorProps {
       onSuccess?: () => void
       isLogout: boolean
     }) => Promise<void>
-
   }
 }
 
 export default function Orchestrator(props: OrchestratorProps) {
-
   const { source, getReferentiel, mode } = props
 
   const initialInterrogation = computeInterrogation(props.initialInterrogation)
+  const [lastUpdateDate, setLastUpdateDate] = useState<number | undefined>(
+    initialInterrogation?.stateData?.date,
+  )
+
+  const initialCurrentPage = initialInterrogation?.stateData?.currentPage
+  const initialState = initialInterrogation?.stateData?.state
+
+  const containerRef = useRef<HTMLDivElement>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
+
   const {
     getComponents,
-    goPreviousPage,
-    goNextPage,
+    goPreviousPage: goPreviousLunaticPage,
+    goNextPage: goNextLunaticPage,
+    goToPage: goToLunaticPage,
     getData,
     getChangedData,
     isFirstPage,
@@ -76,63 +89,9 @@ export default function Orchestrator(props: OrchestratorProps) {
     autoSuggesterLoading: true,
     disableFilters: true,
     disableFiltersDescription: false,
+    trackChanges: true,
     componentsOptions: { detailAlwaysDisplayed: true },
   })
-
-  const [lastUpdateDate, setLastUpdateDate] = useState<number | undefined>(
-    initialInterrogation?.stateData?.date,
-  )
-
-  const initialCurrentPage = initialInterrogation?.stateData?.currentPage
-  const initialState = initialInterrogation?.stateData?.state
-
-  // const currentPage =
-  //   currentPageType === PAGE_TYPE.LUNATIC ? pageTag : currentPageType
-
-
-
-  const components = getComponents()
-
-  function handleGoPrevious() {
-    goPreviousPage()
-  }
-
-  function handleGoNext() {
-    goNextPage()
-  }
-
-  const { interrogation, updateInterrogation } = useInterrogation(
-    initialInterrogation,
-
-  )
-
-  const triggerDataAndStateUpdate = (isLogout: boolean = false) => {
-    if (mode === MODE_TYPE.COLLECT && !hasBeenSent(initialState)) {
-      const changedData = getChangedData(true) as InterrogationData
-      const interrogation = updateInterrogation(changedData, currentPage)
-
-      if (
-        !interrogation.stateData ||
-        (!hasDataChanged(changedData) &&
-          (currentPageType === PAGE_TYPE.LUNATIC
-            ? previousPage === PAGE_TYPE.LUNATIC && previousPageTag === pageTag
-            : currentPage === previousPage))
-      ) {
-        return
-      }
-
-      props.updateDataAndStateData({
-        stateData: interrogation.stateData,
-        // we push only the new data, not the full data
-        // changedData.COLLECTED is defined since hasDataChanged checks it
-        data: trimCollectedData(changedData.COLLECTED!),
-        onSuccess: resetChangedData,
-        isLogout: isLogout,
-      })
-      // update date to show on end page message
-      setLastUpdateDate(interrogation.stateData?.date)
-    }
-  }
 
   const validateQuestionnaire = async () => {
     if (mode === MODE_TYPE.COLLECT) {
@@ -153,22 +112,101 @@ export default function Orchestrator(props: OrchestratorProps) {
 
     return Promise.resolve()
   }
+  const { currentPageType, goNext, goPrevious } = useNavigation({
+    goNextLunatic: goNextLunaticPage,
+    goPrevLunatic: goPreviousLunaticPage,
+    goToLunaticPage: goToLunaticPage,
+    isFirstPage,
+    isLastPage,
+    initialCurrentPage,
+    validateQuestionnaire,
+  })
+
+  const currentPage =
+    currentPageType === PAGE_TYPE.LUNATIC ? pageTag : currentPageType
+
+  const components = getComponents()
+
+  const { interrogation, updateInterrogation } =
+    useInterrogation(initialInterrogation)
+
+  useUpdateEffect(() => {
+    //Reset scroll to the container when the top is not visible
+    if (
+      containerRef.current &&
+      containerRef.current.getBoundingClientRect().y < 0
+    ) {
+      containerRef.current.scrollIntoView(true)
+    }
+    //Reset the focus inside content so the next "Tab" will focus inside content
+    if (contentRef.current) {
+      contentRef.current.setAttribute('tabindex', '-1')
+      contentRef.current.focus({
+        preventScroll: true,
+      })
+      contentRef.current.removeAttribute('tabindex')
+    }
+    // Persist data and stateData when page change in "collect" mode,
+    // except on end page since it's handled during questionnaire validation
+    if (currentPageType !== PAGE_TYPE.END) {
+      triggerDataAndStateUpdate()
+    }
+  }, [currentPageType, pageTag])
+
+  useEffect(() => {
+    return () => {
+      triggerDataAndStateUpdate()
+    }
+  }, [])
+
+  const triggerDataAndStateUpdate = async (isLogout: boolean = false) => {
+    if (mode === MODE_TYPE.COLLECT && !hasBeenSent(initialState)) {
+      const changedData = getChangedData(false) as InterrogationData
+      const interrogation = updateInterrogation(changedData, currentPage)
+
+      if (!interrogation.stateData) {
+        return
+      }
+
+      try {
+        await props.updateDataAndStateData({
+          stateData: interrogation.stateData,
+          data: trimCollectedData(changedData.COLLECTED!),
+          onSuccess: () => {
+            resetChangedData()
+            setLastUpdateDate(interrogation.stateData?.date)
+          },
+          isLogout: isLogout,
+        })
+      } catch (error) {
+        console.error('Failed to update data:', error)
+      }
+    }
+  }
 
   return (
     <LunaticProvider>
-      <div className="p-3">
-        <LunaticComponents components={components} autoFocusKey={pageTag} />
-      </div>
-      <div className="p-6">
-        <Navigation
-          onNext={handleGoNext}
-          onPrevious={handleGoPrevious}
-          isFirstPage={isFirstPage}
-          isLastPage={isLastPage}
-        />
-      </div>
-      <div className="p-6">
-        <DataDownload getData={getData} />
+      <div ref={containerRef}>
+        <div className="p-3">
+          {currentPageType === PAGE_TYPE.LUNATIC && (
+            <LunaticComponents components={components} autoFocusKey={pageTag} />
+          )}
+          {currentPageType === PAGE_TYPE.VALIDATION && <ValidationPage />}
+          {currentPageType === PAGE_TYPE.END && (
+            <EndPage state={initialState} date={lastUpdateDate} />
+          )}
+        </div>
+        <div className="p-6">
+          <Navigation
+            onNext={goNext}
+            onPrevious={goPrevious}
+            isFirstPage={isFirstPage}
+            isLastPage={isLastPage}
+          />
+        </div>
+        <div className="p-6">
+          <DataDownload getData={getData} />
+        </div>
       </div>
     </LunaticProvider>
   )
