@@ -30,6 +30,7 @@
     "react-dom": "^19.1.0",
     "react-i18next": "^15.6.0",
     "tailwindcss": "^4.1.11",
+    "tsafe": "^1.8.12",
     "zod": "^4.1.12"
   },
   "devDependencies": {

@@ -7,6 +7,7 @@ import type { LunaticGetReferentiel } from '@/models/lunaticType'
 import { Route } from '@/routes/visualize'
 
 import Orchestrator from '../orchestrator/Orchestrator'
+import { MODE_TYPE } from '@/models/mode'
 
 export const VisualizePage = memo(() => {
   const loaderResults = Route.useLoaderData()
@@ -32,5 +33,5 @@ export const VisualizePage = memo(() => {
     )
   }
 
-  return <Orchestrator source={source} getReferentiel={getReferentiel} />
+  return <Orchestrator mode={MODE_TYPE.VISUALIZE} source={source} getReferentiel={getReferentiel} />
 })
