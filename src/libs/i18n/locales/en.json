@@ -8,7 +8,7 @@
   },
   "endPage": {
     "title": "End Page",
-    "paragraph": "This is the end page."
+    "paragraph": "This questionnaire was completed on {{formattedDate}}."
   },
   "validationPage": {
     "title": "Validation Page",
