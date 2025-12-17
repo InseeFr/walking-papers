@@ -21,13 +21,13 @@ import Navigation from './Navigation'
 import { EndPage } from './customPages/EndPage'
 import { ValidationPage } from './customPages/ValidationPage'
 import { WelcomePage } from './customPages/WelcomePage'
-import {
-  computeInterrogation,
-  trimCollectedData,
-} from './hooks/interrogationUtils'
 import { useInterrogation } from './hooks/useInterrogation'
 import { useNavigation } from './hooks/useNavigation'
 import { useUpdateEffect } from './hooks/useUpdateEffect'
+import {
+  computeInterrogation,
+  trimCollectedData,
+} from './utils/interrogationUtils'
 import { hasBeenSent } from './utils/orchestrator'
 
 export type OrchestratorProps = OrchestratorProps.Common &

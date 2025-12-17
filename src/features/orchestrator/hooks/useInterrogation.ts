@@ -5,7 +5,7 @@ import type { InterrogationData } from '@/models/interrogationData'
 import { PAGE_TYPE, type PageType } from '@/models/pageType'
 import type { QuestionnaireState } from '@/models/questionnaireState'
 
-import { computeUpdatedData, hasDataChanged } from './interrogationUtils'
+import { computeUpdatedData, hasDataChanged } from '../utils/interrogationUtils'
 
 const emptyData: InterrogationData = {}
 
