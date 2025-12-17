@@ -14,7 +14,7 @@ export const { OidcProvider, useOidc, getOidc } =
         isUserInitiallyLoggedIn: false,
         mockedTokens: {
           decodedIdToken: {
-            sid: `mock-${self.crypto.randomUUID()}`,
+            sid: `mock-${globalThis.crypto.randomUUID()}`,
             sub: 'mock-sub',
             preferred_username: 'mock-user',
           } satisfies z.infer<typeof decodedIdTokenSchema>,

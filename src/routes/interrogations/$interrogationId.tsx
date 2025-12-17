@@ -30,15 +30,13 @@ export const Route = createFileRoute('/interrogations/$interrogationId')({
       )
     }
 
-    const sourcePr = queryClient
+    const source = await queryClient
       .ensureQueryData(
         getGetQuestionnaireDataQueryOptions(interrogation.questionnaireId, {
           request: { signal: abortController.signal },
         }),
       )
       .then((e) => e as unknown as LunaticSource)
-
-    const [source] = await Promise.all([sourcePr])
 
     return {
       source,

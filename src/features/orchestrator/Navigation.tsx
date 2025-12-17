@@ -30,7 +30,7 @@ export default function Navigation({
       >
         {t('common.previous')}
       </Button>
-      {currentPageType != PAGE_TYPE.END ? (
+      {currentPageType !== PAGE_TYPE.END ? (
         <Button onClick={onNext} IconRight={<ArrowRightIcon />}>
           {currentPageType === PAGE_TYPE.VALIDATION
             ? t('common.validateData')

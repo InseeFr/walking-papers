@@ -103,7 +103,7 @@ export default function Orchestrator(props: OrchestratorProps) {
         stateData: {
           ...interrogation.stateData,
           state: 'VALIDATED',
-          date: new Date().getTime(),
+          date: Date.now(),
           currentPage: PAGE_TYPE.END,
         },
         // there is no new data to send on validation page
@@ -111,8 +111,6 @@ export default function Orchestrator(props: OrchestratorProps) {
         isLogout: false,
       })
     }
-
-    return Promise.resolve()
   }
   const { currentPageType, goNext, goPrevious } = useNavigation({
     goNextLunatic: goNextLunaticPage,

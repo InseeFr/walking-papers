@@ -20,11 +20,6 @@ export const InterrogationPage = memo(() => {
   const loaderResults = Route.useLoaderData()
   const queryClient = useQueryClient()
 
-  if (!loaderResults) {
-    return <>Veuillez spécifier la source (url du lunatic questionnaire) </>
-  }
-  const { source, interrogation } = loaderResults
-
   const getReferentiel: LunaticGetReferentiel = useCallback(
     (name: string) =>
       queryClient
@@ -32,6 +27,11 @@ export const InterrogationPage = memo(() => {
         .then((result) => result as unknown as Nomenclature),
     [queryClient],
   )
+
+  if (!loaderResults) {
+    return <>Veuillez spécifier la source (url du lunatic questionnaire) </>
+  }
+  const { source, interrogation } = loaderResults
 
   const queryKeyToInvalidate = getGetInterrogationByIdQueryKey(interrogationId)
 
@@ -60,7 +60,7 @@ export const InterrogationPage = memo(() => {
         if (!params.isLogout) {
           console.error('Save failed:', error)
 
-          return Promise.reject(error)
+          throw error
         }
       })
 
