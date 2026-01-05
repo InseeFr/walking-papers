@@ -1,6 +1,6 @@
 import axios, { type AxiosRequestConfig } from 'axios'
 
-import { getOidc } from '@/oidc'
+import { getOidc } from '@/libs/i18n/auth/oidc'
 
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_URL,

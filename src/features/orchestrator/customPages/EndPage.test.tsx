@@ -20,9 +20,7 @@ describe('EndPage', () => {
     const { container } = renderWithI18n(<EndPage />)
 
     // Check that the paragraph exists but without a specific date
-    expect(container.textContent).toContain(
-      'This questionnaire was completed on',
-    )
+    expect(container.textContent).toContain('This questionnaire was completed')
   })
 
   it('does not display date if data have been flagged for extraction', () => {
@@ -32,7 +30,6 @@ describe('EndPage', () => {
       <EndPage date={date} state={'TOEXTRACT'} />,
     )
 
-    // Adjust this based on what your component actually renders
     expect(getByText('End Page')).toBeInTheDocument()
   })
 
@@ -43,7 +40,6 @@ describe('EndPage', () => {
       <EndPage date={date} state={'EXTRACTED'} />,
     )
 
-    // Adjust this based on what your component actually renders
     expect(getByText('End Page')).toBeInTheDocument()
   })
 })

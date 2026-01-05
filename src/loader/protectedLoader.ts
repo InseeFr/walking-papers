@@ -1,16 +1,16 @@
-import { getOidc } from '@/oidc'
+import { getOidc } from '@/libs/i18n/auth/oidc'
 
 export async function protectedRouteLoader(
-    extraQueryParams?: Record<string, string>,
+  extraQueryParams?: Record<string, string>,
 ) {
-    const oidc = await getOidc()
+  const oidc = await getOidc()
 
-    if (oidc.isUserLoggedIn) {
-        return null
-    }
+  if (oidc.isUserLoggedIn) {
+    return null
+  }
 
-    await oidc.login({
-        doesCurrentHrefRequiresAuth: true,
-        extraQueryParams,
-    })
+  await oidc.login({
+    doesCurrentHrefRequiresAuth: true,
+    extraQueryParams,
+  })
 }

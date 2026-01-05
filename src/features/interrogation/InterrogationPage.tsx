@@ -1,4 +1,4 @@
-import { memo, useCallback } from 'react'
+import { useCallback } from 'react'
 
 import type { LunaticData } from '@inseefr/lunatic'
 import { useQueryClient } from '@tanstack/react-query'
@@ -15,7 +15,7 @@ import { Route } from '@/routes/interrogations/$interrogationId'
 
 import Orchestrator from '../orchestrator/Orchestrator'
 
-export const InterrogationPage = memo(() => {
+export function InterrogationPage() {
   const { interrogationId } = Route.useParams()
   const loaderResults = Route.useLoaderData()
   const queryClient = useQueryClient()
@@ -73,4 +73,4 @@ export const InterrogationPage = memo(() => {
       updateDataAndStateData={updateDataAndStateData}
     />
   )
-})
+}

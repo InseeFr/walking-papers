@@ -1,8 +1,7 @@
 import { useTranslation } from 'react-i18next'
 
 /**
- * Page displayed when the user finishes the survey before they submit their
- * answers
+ * Initial page displayed to the user when they start the survey
  */
 export function WelcomePage() {
   const { t } = useTranslation()

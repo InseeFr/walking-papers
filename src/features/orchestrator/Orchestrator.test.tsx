@@ -1,14 +1,10 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { expect, vi } from 'vitest'
 
 import type { Interrogation } from '@/models/interrogation'
 import { MODE_TYPE } from '@/models/mode'
-import { PAGE_TYPE } from '@/models/pageType'
 import { renderWithRouter } from '@/testing/render'
 
 import Orchestrator from './Orchestrator'
-
-const queryClient = new QueryClient()
 
 describe('Orchestrator', () => {
   const defaultInterrogation = {
@@ -77,44 +73,21 @@ describe('Orchestrator', () => {
       stateData: Interrogation['stateData']
     }) => Promise<void>
   }) => (
-    <QueryClientProvider client={queryClient}>
-      <Orchestrator
-        mode={mode}
-        isDownloadEnabled={isDownloadEnabled}
-        initialInterrogation={initialInterrogation}
-        // @ts-expect-error: we should have a better lunatic mock
-        source={source}
-        getReferentiel={() => {
-          return new Promise(() => [])
-        }}
-        updateDataAndStateData={updateDataAndStateData}
-      />
-    </QueryClientProvider>
+    <Orchestrator
+      mode={mode}
+      isDownloadEnabled={isDownloadEnabled}
+      initialInterrogation={initialInterrogation}
+      // @ts-expect-error: we should have a better lunatic mock
+      source={source}
+      getReferentiel={() => {
+        return new Promise(() => [])
+      }}
+      updateDataAndStateData={updateDataAndStateData}
+    />
   )
 
   beforeEach(() => {
     vi.clearAllMocks()
-  })
-
-  it('should render welcome page initially', async () => {
-    const mockWelcomeInterrogation = {
-      stateData: {
-        currentPage: PAGE_TYPE.WELCOME,
-        state: 'INIT',
-        date: Date.now(),
-      },
-      data: {},
-      id: 'welcome-interrogation-id',
-    } as Interrogation
-
-    const { getByText } = await renderWithRouter(
-      <OrchestratorTestWrapper
-        mode={MODE_TYPE.COLLECT}
-        initialInterrogation={mockWelcomeInterrogation}
-      />,
-    )
-
-    expect(getByText(/Welcome Page/)).toBeInTheDocument()
   })
 
   it('should render navigation component', async () => {

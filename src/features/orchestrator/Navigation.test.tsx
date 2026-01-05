@@ -1,5 +1,6 @@
 import userEvent from '@testing-library/user-event'
 
+import { PAGE_TYPE } from '@/models/pageType'
 import { renderWithI18n } from '@/testing/render'
 
 import Navigation from './Navigation'
@@ -27,7 +28,7 @@ describe('Navigation', () => {
       <Navigation
         onNext={foo}
         onPrevious={vi.fn()}
-        currentPageType="validationPage"
+        currentPageType={PAGE_TYPE.VALIDATION}
       />,
     )
     expect(getByRole('button', { name: /Validate Data/i })).toBeInTheDocument()

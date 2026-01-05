@@ -10,8 +10,6 @@ import type { Interrogation } from '@/models/interrogation'
 
 export const Route = createFileRoute('/interrogations/$interrogationId')({
   beforeLoad: async () => protectedRouteLoader(),
-  gcTime: 0,
-  pendingMs: 0,
   component: () => <InterrogationPage />,
   loader: async ({
     params: { interrogationId },

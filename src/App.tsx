@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { RouterProvider, createRouter } from '@tanstack/react-router'
 
-import { OidcProvider } from '@/oidc'
+import { OidcProvider } from '@/libs/i18n/auth/oidc'
 
 import './libs/i18n'
 import { routeTree } from './routeTree.gen'

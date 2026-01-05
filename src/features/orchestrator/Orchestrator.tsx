@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 
 import {
   LunaticComponents,
@@ -18,9 +18,7 @@ import type { StateData } from '@/models/stateData'
 
 import DataDownload from './DataDownload'
 import Navigation from './Navigation'
-import { EndPage } from './customPages/EndPage'
 import { ValidationPage } from './customPages/ValidationPage'
-import { WelcomePage } from './customPages/WelcomePage'
 import { useInterrogation } from './hooks/useInterrogation'
 import { useNavigation } from './hooks/useNavigation'
 import { useUpdateEffect } from './hooks/useUpdateEffect'
@@ -30,43 +28,38 @@ import {
 } from './utils/interrogationUtils'
 import { hasBeenSent } from './utils/orchestrator'
 
-export type OrchestratorProps = OrchestratorProps.Common &
-  (OrchestratorProps.Visualize | OrchestratorProps.Collect)
-
-// eslint-disable-next-line @typescript-eslint/no-namespace
-export namespace OrchestratorProps {
-  export type Common = {
-    /** Questionnaire data consumed by Lunatic to make its components */
-    source: LunaticSource
-    /** Initial interrogation when we initialize the orchestrator */
-    initialInterrogation?: Interrogation
-    /** Allows to fetch nomenclature by id */
-    getReferentiel: LunaticGetReferentiel
-  }
-
-  export type Visualize = {
-    mode: MODE_TYPE.VISUALIZE
-  }
-
-  export type Collect = {
-    mode: MODE_TYPE.COLLECT
-    /** Updates data with the modified data and survey state */
-    updateDataAndStateData: (params: {
-      stateData: StateData
-      data: LunaticData['COLLECTED']
-      onSuccess?: () => void
-      isLogout: boolean
-    }) => Promise<void>
-  }
+type OrchestratorCommonProps = {
+  /** Questionnaire data consumed by Lunatic to make its components */
+  source: LunaticSource
+  /** Initial interrogation when we initialize the orchestrator */
+  initialInterrogation?: Interrogation
+  /** Allows to fetch nomenclature by id */
+  getReferentiel: LunaticGetReferentiel
 }
+
+type OrchestratorVisualizeProps = OrchestratorCommonProps & {
+  mode: MODE_TYPE.VISUALIZE
+}
+
+type OrchestratorCollectProps = OrchestratorCommonProps & {
+  mode: MODE_TYPE.COLLECT
+  /** Updates data with the modified data and survey state */
+  updateDataAndStateData: (params: {
+    stateData: StateData
+    data: LunaticData['COLLECTED']
+    onSuccess?: () => void
+    isLogout: boolean
+  }) => Promise<void>
+}
+
+export type OrchestratorProps =
+  | OrchestratorVisualizeProps
+  | OrchestratorCollectProps
 
 export default function Orchestrator(props: OrchestratorProps) {
   const { source, getReferentiel, mode } = props
 
   const initialInterrogation = computeInterrogation(props.initialInterrogation)
-  const [lastUpdateDate, setLastUpdateDate] = useState<number | undefined>(
-    initialInterrogation?.stateData?.date,
-  )
 
   const initialCurrentPage = initialInterrogation?.stateData?.currentPage
   const initialState = initialInterrogation?.stateData?.state
@@ -174,7 +167,6 @@ export default function Orchestrator(props: OrchestratorProps) {
           data: trimCollectedData(changedData.COLLECTED!),
           onSuccess: () => {
             resetChangedData()
-            setLastUpdateDate(interrogation.stateData?.date)
           },
           isLogout: isLogout,
         })
@@ -188,14 +180,10 @@ export default function Orchestrator(props: OrchestratorProps) {
     <LunaticProvider>
       <div ref={containerRef}>
         <div className="p-3">
-          {currentPageType === PAGE_TYPE.WELCOME && <WelcomePage />}
           {currentPageType === PAGE_TYPE.LUNATIC && (
             <LunaticComponents components={components} autoFocusKey={pageTag} />
           )}
           {currentPageType === PAGE_TYPE.VALIDATION && <ValidationPage />}
-          {currentPageType === PAGE_TYPE.END && (
-            <EndPage state={initialState} date={lastUpdateDate} />
-          )}
         </div>
         <div className="p-6">
           <Navigation

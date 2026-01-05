@@ -3,8 +3,7 @@ import { useTranslation } from 'react-i18next'
 import type { StateData } from '@/models/stateData'
 
 /**
- * Page displayed when the user finishes the survey before they submit their
- * answers
+ * Page displayed when the user finishes the survey
  */
 export function EndPage({
   date,
@@ -14,6 +13,8 @@ export function EndPage({
   state?: StateData['state']
 }>) {
   const formattedDate = date ? new Date(date).toLocaleString() : undefined
+
+  // Check to see ensure the survey has only been validated and not marked for extraction or extracted
   const isDateStillValid = state !== 'TOEXTRACT' && state !== 'EXTRACTED'
   const { t } = useTranslation()
 
