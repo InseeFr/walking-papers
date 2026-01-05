@@ -5,12 +5,7 @@ import type {
   LunaticGoPreviousPage,
   LunaticGoToPage,
 } from '@/models/lunaticType'
-import {
-  type InternalPageType,
-  type NirvanaPage,
-  PAGE_TYPE,
-  type PageType,
-} from '@/models/pageType'
+import { type NirvanaPage, PAGE_TYPE, type PageType } from '@/models/pageType'
 
 type Params = {
   isFirstPage?: boolean
@@ -28,45 +23,30 @@ type Params = {
 export function useNavigation({
   isFirstPage = false,
   isLastPage = false,
-  initialCurrentPage = PAGE_TYPE.WELCOME,
+  initialCurrentPage = '1',
   goNextLunatic = () => {},
   goPrevLunatic = () => {},
   goToLunaticPage = () => {},
   validateQuestionnaire = () => new Promise<void>(() => {}),
 }: Params) {
-  const [currentPageType, setCurrentPageType] = useState<InternalPageType>(
-    () =>
-      initialCurrentPage === PAGE_TYPE.END ? PAGE_TYPE.END : PAGE_TYPE.WELCOME,
-  )
+  const [currentPage, setCurrentPage] = useState<PageType>(initialCurrentPage)
 
   const goNext = async () => {
-    switch (currentPageType) {
-      case PAGE_TYPE.VALIDATION:
-        await validateQuestionnaire()
-        setCurrentPageType(PAGE_TYPE.END)
-        return
-      case PAGE_TYPE.WELCOME:
-        return setCurrentPageType(PAGE_TYPE.LUNATIC)
-      case PAGE_TYPE.LUNATIC:
-        return isLastPage
-          ? setCurrentPageType(PAGE_TYPE.VALIDATION)
-          : goNextLunatic()
+    switch (currentPage) {
       case PAGE_TYPE.END:
         return
+      default:
+        return isLastPage
+          ? (await validateQuestionnaire(), setCurrentPage(PAGE_TYPE.END))
+          : goNextLunatic()
     }
   }
 
   const goPrevious = () => {
-    switch (currentPageType) {
-      case PAGE_TYPE.VALIDATION:
-        return setCurrentPageType(PAGE_TYPE.LUNATIC)
-      case PAGE_TYPE.LUNATIC:
-        return isFirstPage
-          ? setCurrentPageType(PAGE_TYPE.WELCOME)
-          : goPrevLunatic()
+    switch (currentPage) {
       case PAGE_TYPE.END:
-      case PAGE_TYPE.WELCOME:
-        return
+      default:
+        return isFirstPage ? null : goPrevLunatic()
     }
   }
 
@@ -77,17 +57,12 @@ export function useNavigation({
         }
       | Parameters<LunaticGoToPage>[0],
   ) => {
-    switch (params.page) {
-      case PAGE_TYPE.VALIDATION:
-      case PAGE_TYPE.END:
-      case PAGE_TYPE.WELCOME:
-        setCurrentPageType(params.page)
-        return
-      default:
-        // Lunatic page
-        setCurrentPageType(PAGE_TYPE.LUNATIC)
-        goToLunaticPage(params)
+    if (params.page === PAGE_TYPE.END) {
+      setCurrentPage(PAGE_TYPE.END)
+      return
     }
+
+    goToLunaticPage(params)
   }
-  return { goNext, goPrevious, goToPage, currentPageType }
+  return { goNext, goPrevious, goToPage, currentPage }
 }

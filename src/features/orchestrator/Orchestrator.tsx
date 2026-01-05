@@ -18,7 +18,7 @@ import type { StateData } from '@/models/stateData'
 
 import DataDownload from './DataDownload'
 import Navigation from './Navigation'
-import { ValidationPage } from './customPages/ValidationPage'
+import { EndPage } from './customPages/EndPage'
 import { useInterrogation } from './hooks/useInterrogation'
 import { useNavigation } from './hooks/useNavigation'
 import { useUpdateEffect } from './hooks/useUpdateEffect'
@@ -105,7 +105,7 @@ export default function Orchestrator(props: OrchestratorProps) {
       })
     }
   }
-  const { currentPageType, goNext, goPrevious } = useNavigation({
+  const { currentPage, goNext, goPrevious } = useNavigation({
     goNextLunatic: goNextLunaticPage,
     goPrevLunatic: goPreviousLunaticPage,
     goToLunaticPage: goToLunaticPage,
@@ -114,9 +114,6 @@ export default function Orchestrator(props: OrchestratorProps) {
     initialCurrentPage,
     validateQuestionnaire,
   })
-
-  const currentPage =
-    currentPageType === PAGE_TYPE.LUNATIC ? pageTag : currentPageType
 
   const components = getComponents()
 
@@ -141,10 +138,10 @@ export default function Orchestrator(props: OrchestratorProps) {
     }
     // Persist data and stateData when page change in "collect" mode,
     // except on end page since it's handled during questionnaire validation
-    if (currentPageType !== PAGE_TYPE.END) {
+    if (currentPage !== PAGE_TYPE.END) {
       triggerDataAndStateUpdate()
     }
-  }, [currentPageType, pageTag])
+  }, [currentPage, pageTag])
 
   useEffect(() => {
     return () => {
@@ -180,19 +177,25 @@ export default function Orchestrator(props: OrchestratorProps) {
     <LunaticProvider>
       <div ref={containerRef}>
         <div className="p-3">
-          {currentPageType === PAGE_TYPE.LUNATIC && (
-            <LunaticComponents components={components} autoFocusKey={pageTag} />
+          {currentPage !== PAGE_TYPE.END && (
+            <>
+              <LunaticComponents
+                components={components}
+                autoFocusKey={pageTag}
+              />
+              <div className="p-6">
+                <Navigation
+                  onNext={goNext}
+                  onPrevious={goPrevious}
+                  isFirstPage={isFirstPage}
+                  isLastPage={isLastPage}
+                />
+              </div>
+            </>
           )}
-          {currentPageType === PAGE_TYPE.VALIDATION && <ValidationPage />}
+          {currentPage === PAGE_TYPE.END && <EndPage />}
         </div>
-        <div className="p-6">
-          <Navigation
-            onNext={goNext}
-            onPrevious={goPrevious}
-            currentPageType={currentPageType}
-            isFirstPage={isFirstPage}
-          />
-        </div>
+
         <div className="p-6">
           <DataDownload getData={getData} />
         </div>

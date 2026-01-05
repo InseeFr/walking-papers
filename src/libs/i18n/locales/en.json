@@ -4,15 +4,17 @@
     "downloadData": "Download data",
     "next": "Next",
     "validateData": "Validate data",
-    "previous": "Previous"
+    "previous": "Previous",
+    "cancel": "Cancel",
+    "validate": "Validate"
   },
   "endPage": {
     "title": "End Page",
     "paragraph": "This questionnaire was completed on {{formattedDate}}."
   },
-  "validationPage": {
-    "title": "Validation Page",
-    "paragraph": "This is the validation page."
+  "validate": {
+    "title": "Validat data",
+    "label": "Are you sure you want to validate the entered data? This action is irreversible."
   },
   "welcomePage": {
     "title": "Welcome Page",

@@ -1,6 +1,5 @@
 import userEvent from '@testing-library/user-event'
 
-import { PAGE_TYPE } from '@/models/pageType'
 import { renderWithI18n } from '@/testing/render'
 
 import Navigation from './Navigation'
@@ -21,19 +20,12 @@ describe('Navigation', () => {
     expect(bar).toHaveBeenCalledOnce()
   })
 
-  it('shows validate data on validation page', async () => {
-    const user = userEvent.setup()
+  it('shows validate button on last page', async () => {
     const foo = vi.fn()
     const { getByRole } = renderWithI18n(
-      <Navigation
-        onNext={foo}
-        onPrevious={vi.fn()}
-        currentPageType={PAGE_TYPE.VALIDATION}
-      />,
+      <Navigation onNext={foo} onPrevious={vi.fn()} isLastPage />,
     )
     expect(getByRole('button', { name: /Validate Data/i })).toBeInTheDocument()
-    await user.click(getByRole('button', { name: /Validate Data/i }))
-    expect(foo).toHaveBeenCalledOnce()
   })
 
   it('disable previous on first page', async () => {

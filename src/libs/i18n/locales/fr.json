@@ -4,15 +4,17 @@
     "downloadData": "Télécharger les données",
     "next": "Suivant",
     "validateData": "Valider les données saisies",
-    "previous": "Précédent"
+    "previous": "Précédent",
+    "cancel": "Annuler",
+    "validate": "Valider"
   },
   "endPage": {
     "title": "Fin de la saisie",
     "paragraph": "Page de fin."
   },
-  "validationPage": {
-    "title": "Validation des données saisies",
-    "paragraph": "Page de validation."
+  "validate": {
+    "title": "Valider les données saisies",
+    "label": "Êtes-vous sûr de vouloir valider les données saisies ? Cette action est irréversible."
   },
   "welcomePage": {
     "title": "Bienvenue",
