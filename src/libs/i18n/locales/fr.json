@@ -15,9 +15,5 @@
   "validate": {
     "title": "Valider les données saisies",
     "label": "Êtes-vous sûr de vouloir valider les données saisies ? Cette action est irréversible."
-  },
-  "welcomePage": {
-    "title": "Bienvenue",
-    "paragraph": "Page d'accueil du questionnaire."
   }
 }

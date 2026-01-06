@@ -51,10 +51,6 @@ export function InterrogationPage() {
         })
 
         params.onSuccess?.()
-
-        if (params.data && !params.isLogout) {
-          console.log('Save successful')
-        }
       })
       .catch((error: Error) => {
         if (!params.isLogout) {

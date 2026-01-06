@@ -47,12 +47,11 @@ export function useInterrogation(initialInterrogation: Interrogation) {
       ...initialInterrogation,
       data,
     }
-    //const previousStateData = interrogation.stateData
     if (newState) {
       result.stateData = {
         state: newState,
         date: Date.now(),
-        currentPage: currentPage ?? PAGE_TYPE.WELCOME,
+        currentPage: currentPage ?? '1',
       }
     }
     setInterrogation(result)

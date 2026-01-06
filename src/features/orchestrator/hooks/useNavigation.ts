@@ -5,7 +5,7 @@ import type {
   LunaticGoPreviousPage,
   LunaticGoToPage,
 } from '@/models/lunaticType'
-import { type NirvanaPage, PAGE_TYPE, type PageType } from '@/models/pageType'
+import { PAGE_TYPE, type PageType } from '@/models/pageType'
 
 type Params = {
   isFirstPage?: boolean
@@ -26,7 +26,6 @@ export function useNavigation({
   initialCurrentPage = '1',
   goNextLunatic = () => {},
   goPrevLunatic = () => {},
-  goToLunaticPage = () => {},
   validateQuestionnaire = () => new Promise<void>(() => {}),
 }: Params) {
   const [currentPage, setCurrentPage] = useState<PageType>(initialCurrentPage)
@@ -49,20 +48,5 @@ export function useNavigation({
         return isFirstPage ? null : goPrevLunatic()
     }
   }
-
-  const goToPage = (
-    params:
-      | {
-          page: NirvanaPage
-        }
-      | Parameters<LunaticGoToPage>[0],
-  ) => {
-    if (params.page === PAGE_TYPE.END) {
-      setCurrentPage(PAGE_TYPE.END)
-      return
-    }
-
-    goToLunaticPage(params)
-  }
-  return { goNext, goPrevious, goToPage, currentPage }
+  return { goNext, goPrevious, currentPage }
 }

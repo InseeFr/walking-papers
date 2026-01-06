@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 
 import Button, { ButtonStyle } from './Button'
 
-interface DialogButtonProps {
+interface DialogProps {
   /** Body message in the dialog. */
   body: React.ReactNode
   /**
@@ -41,7 +41,7 @@ export default function Dialog({
   children,
   controlledOpen,
   setControlledOpen,
-}: Readonly<DialogButtonProps>) {
+}: Readonly<DialogProps>) {
   const { t } = useTranslation()
   const [uncontrolledOpen, setUncontrolledOpen] = useState(false)
 

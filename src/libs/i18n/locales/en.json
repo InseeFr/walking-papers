@@ -13,11 +13,7 @@
     "paragraph": "This questionnaire was completed on {{formattedDate}}."
   },
   "validate": {
-    "title": "Validat data",
+    "title": "Validate data",
     "label": "Are you sure you want to validate the entered data? This action is irreversible."
-  },
-  "welcomePage": {
-    "title": "Welcome Page",
-    "paragraph": "This is the welcome page."
   }
 }
