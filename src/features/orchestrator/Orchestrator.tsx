@@ -91,6 +91,7 @@ export default function Orchestrator(props: OrchestratorProps) {
   const validateQuestionnaire = async () => {
     if (mode === MODE_TYPE.COLLECT) {
       assert(interrogation.stateData !== undefined)
+      const changedData = getChangedData(false) as InterrogationData
 
       return await props.updateDataAndStateData({
         stateData: {
@@ -100,7 +101,7 @@ export default function Orchestrator(props: OrchestratorProps) {
           currentPage: PAGE_TYPE.END,
         },
         // there is no new data to send on validation page
-        data: {},
+        data: trimCollectedData(changedData.COLLECTED!),
         isLogout: false,
       })
     }
