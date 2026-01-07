@@ -54,8 +54,6 @@ export function InterrogationPage() {
       })
       .catch((error: Error) => {
         if (!params.isLogout) {
-          console.error('Save failed:', error)
-
           throw error
         }
       })

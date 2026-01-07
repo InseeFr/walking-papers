@@ -34,12 +34,10 @@ export const VisualizePage = memo(() => {
   }
 
   return (
-    <>
-      <Orchestrator
-        mode={MODE_TYPE.VISUALIZE}
-        source={source}
-        getReferentiel={getReferentiel}
-      />
-    </>
+    <Orchestrator
+      mode={MODE_TYPE.VISUALIZE}
+      source={source}
+      getReferentiel={getReferentiel}
+    />
   )
 })

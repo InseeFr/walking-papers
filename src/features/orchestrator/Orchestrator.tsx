@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import {
   LunaticComponents,
@@ -9,6 +9,7 @@ import {
 import '@inseefr/lunatic/main.css'
 import { assert } from 'tsafe/assert'
 
+import WelcomeModal from '@/components/WelcomeModal'
 import type { Interrogation } from '@/models/interrogation'
 import type { InterrogationData } from '@/models/interrogationData'
 import type { LunaticGetReferentiel } from '@/models/lunaticType'
@@ -62,10 +63,13 @@ export default function Orchestrator(props: OrchestratorProps) {
   const initialInterrogation = computeInterrogation(props.initialInterrogation)
 
   const initialCurrentPage = initialInterrogation?.stateData?.currentPage
+
   const initialState = initialInterrogation?.stateData?.state
 
   const containerRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
+
+  const [openModal, setOpenModal] = useState(false)
 
   const {
     getComponents,
@@ -100,13 +104,13 @@ export default function Orchestrator(props: OrchestratorProps) {
           date: Date.now(),
           currentPage: PAGE_TYPE.END,
         },
-        // there is no new data to send on validation page
         data: trimCollectedData(changedData.COLLECTED!),
         isLogout: false,
       })
     }
   }
-  const { currentPage, goNext, goPrevious } = useNavigation({
+
+  const { currentPage, goNext, goPrevious, goToPage } = useNavigation({
     goNextLunatic: goNextLunaticPage,
     goPrevLunatic: goPreviousLunaticPage,
     goToLunaticPage: goToLunaticPage,
@@ -144,9 +148,16 @@ export default function Orchestrator(props: OrchestratorProps) {
     }
   }, [currentPage, pageTag])
 
+  const shouldDisplayWelcomeModal = () => {
+    return (
+      currentPage != '1' && currentPage !== PAGE_TYPE.END && pageTag === '1'
+    )
+  }
+
   useEffect(() => {
     return () => {
       triggerDataAndStateUpdate()
+      setOpenModal(shouldDisplayWelcomeModal())
     }
   }, [])
 
@@ -202,6 +213,12 @@ export default function Orchestrator(props: OrchestratorProps) {
           </div>
         )}
       </div>
+      <WelcomeModal
+        onCancel={() => goToPage({ page: '1' })}
+        onValidate={() => goToPage({ page: currentPage })}
+        open={openModal}
+        setOpen={setOpenModal}
+      />
     </LunaticProvider>
   )
 }

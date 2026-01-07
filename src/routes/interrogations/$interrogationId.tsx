@@ -3,7 +3,7 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { getGetQuestionnaireDataQueryOptions } from '@/api/03-questionnaires'
 import { getInterrogationById } from '@/api/06-interrogations'
-import ErrorPage from '@/components/ErrorPage'
+import ErrorPage from '@/features/errorPage/ErrorPage'
 import { InterrogationPage } from '@/features/interrogation/InterrogationPage'
 import { protectedRouteLoader } from '@/loader/protectedLoader'
 import type { Interrogation } from '@/models/interrogation'

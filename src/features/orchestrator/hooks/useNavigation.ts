@@ -26,6 +26,7 @@ export function useNavigation({
   initialCurrentPage = '1',
   goNextLunatic = () => {},
   goPrevLunatic = () => {},
+  goToLunaticPage = () => {},
   validateQuestionnaire = () => new Promise<void>(() => {}),
 }: Params) {
   const [currentPage, setCurrentPage] = useState<PageType>(initialCurrentPage)
@@ -48,5 +49,20 @@ export function useNavigation({
         return isFirstPage ? null : goPrevLunatic()
     }
   }
-  return { goNext, goPrevious, currentPage }
+
+  const goToPage = (
+    params:
+      | {
+          page: PAGE_TYPE.END
+        }
+      | Parameters<LunaticGoToPage>[0],
+  ) => {
+    if (params.page === PAGE_TYPE.END) {
+      setCurrentPage(PAGE_TYPE.END)
+      return
+    }
+
+    goToLunaticPage(params)
+  }
+  return { goNext, goPrevious, goToPage, currentPage }
 }
