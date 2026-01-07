@@ -196,10 +196,11 @@ export default function Orchestrator(props: OrchestratorProps) {
           )}
           {currentPage === PAGE_TYPE.END && <EndPage />}
         </div>
-
-        <div className="p-6">
-          <DataDownload getData={getData} />
-        </div>
+        {mode === MODE_TYPE.VISUALIZE && (
+          <div className="p-6">
+            <DataDownload getData={getData} />
+          </div>
+        )}
       </div>
     </LunaticProvider>
   )

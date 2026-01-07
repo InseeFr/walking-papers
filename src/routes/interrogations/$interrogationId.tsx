@@ -9,7 +9,10 @@ import { protectedRouteLoader } from '@/loader/protectedLoader'
 import type { Interrogation } from '@/models/interrogation'
 
 export const Route = createFileRoute('/interrogations/$interrogationId')({
-  beforeLoad: async () => protectedRouteLoader(),
+  beforeLoad: async () =>
+    protectedRouteLoader({
+      kc_idp_hint: import.meta.env.VITE_IDENTITY_PROVIDER,
+    }),
   component: () => <InterrogationPage />,
   loader: async ({
     params: { interrogationId },

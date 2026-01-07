@@ -99,11 +99,25 @@ describe('Orchestrator', () => {
     expect(getByRole('button', { name: /Previous/i })).toBeInTheDocument()
   })
 
-  it('should render data download component', async () => {
+  it('should render data download component on visualize mode', async () => {
+    // Given the user is in visualize mode
     const { getByRole } = await renderWithRouter(
+      <OrchestratorTestWrapper mode={MODE_TYPE.VISUALIZE} />,
+    )
+
+    // Then the data download button is displayed
+    expect(getByRole('button', { name: /Download data/i })).toBeInTheDocument()
+  })
+
+  it('should not render data download component on collect mode', async () => {
+    // Given the user is in collect mode
+    const { queryByRole } = await renderWithRouter(
       <OrchestratorTestWrapper mode={MODE_TYPE.COLLECT} />,
     )
 
-    expect(getByRole('button', { name: /Download data/i })).toBeInTheDocument()
+    // Then the data download button is not displayed
+    expect(
+      queryByRole('button', { name: /Download data/i }),
+    ).not.toBeInTheDocument()
   })
 })
