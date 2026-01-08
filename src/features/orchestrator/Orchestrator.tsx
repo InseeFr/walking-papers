@@ -214,7 +214,7 @@ export default function Orchestrator(props: OrchestratorProps) {
         )}
       </div>
       <WelcomeModal
-        onCancel={() => goToPage({ page: '1' })}
+        onCancel={() => setOpenModal(false)}
         onValidate={() => goToPage({ page: currentPage })}
         open={openModal}
         setOpen={setOpenModal}
