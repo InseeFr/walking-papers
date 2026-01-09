@@ -1,6 +1,7 @@
 import { act, renderHook } from '@testing-library/react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
+import type { LunaticPageTag } from '@/models/lunaticType'
 import { PAGE_TYPE } from '@/models/pageType'
 
 import { useNavigation } from './useNavigation'
@@ -13,24 +14,38 @@ describe('useNavigation', () => {
     vi.clearAllMocks()
   })
 
-  it('should initialize with first page by default', () => {
+  it('should initialize with pageTag by default', () => {
     // Given there is no initial page provided
-    const { result } = renderHook(() => useNavigation({}))
+    const { result } = renderHook(() => useNavigation({ pageTag: '5' }))
 
-    // Then it should start at the first page of the questionnaire
-    expect(result.current.currentPage).toBe('1')
+    // Then it should start at the pageTag
+    expect(result.current.currentPage).toBe('5')
   })
 
-  it('should initialize with provided initial page', () => {
+  it('should initialize with provided pageTag when initial page is a lunatic page', () => {
     // Given there is an initial page provided
     const { result } = renderHook(() =>
       useNavigation({
         initialCurrentPage: '5',
+        pageTag: '1',
       }),
     )
 
-    // Then it should start at the provided page
-    expect(result.current.currentPage).toBe('5')
+    // Then it should start at the provided page tag
+    expect(result.current.currentPage).toBe('1')
+  })
+
+  it('should initialize with end page when initial page is the end page', () => {
+    // Given there is an initial page provided as endPage
+    const { result } = renderHook(() =>
+      useNavigation({
+        initialCurrentPage: PAGE_TYPE.END,
+        pageTag: '1',
+      }),
+    )
+
+    // Then it should start at the end page
+    expect(result.current.currentPage).toBe(PAGE_TYPE.END)
   })
 
   it('should call goNextLunatic when not on last page', async () => {
@@ -39,6 +54,7 @@ describe('useNavigation', () => {
       useNavigation({
         isFirstPage: false,
         isLastPage: false,
+        pageTag: '5',
         goNextLunatic: goNextLunaticMock,
       }),
     )
@@ -57,6 +73,7 @@ describe('useNavigation', () => {
       useNavigation({
         isFirstPage: false,
         isLastPage: true,
+        pageTag: '5',
         goNextLunatic: goNextLunaticMock,
         validateQuestionnaire: validateQuestionnaireMock,
       }),
@@ -78,6 +95,7 @@ describe('useNavigation', () => {
     const { result } = renderHook(() =>
       useNavigation({
         initialCurrentPage: PAGE_TYPE.END,
+        pageTag: '1', // default pageTag given by Lunatic out of Lunatic page
         goNextLunatic: goNextLunaticMock,
         validateQuestionnaire: validateQuestionnaireMock,
       }),
@@ -97,16 +115,17 @@ describe('useNavigation', () => {
   it('should handle page navigation', async () => {
     // Given the user is on the any page that is neither first nor last
     const { result, rerender } = renderHook(
-      ({ isFirst, isLast }) =>
+      ({ isFirst, isLast, pageTag }) =>
         useNavigation({
           isFirstPage: isFirst,
           isLastPage: isLast,
+          pageTag: pageTag as LunaticPageTag,
           goNextLunatic: goNextLunaticMock,
           goPrevLunatic: goPrevLunaticMock,
           validateQuestionnaire: validateQuestionnaireMock,
         }),
       {
-        initialProps: { isFirst: true, isLast: false },
+        initialProps: { isFirst: true, isLast: false, pageTag: '1' },
       },
     )
 
@@ -127,7 +146,7 @@ describe('useNavigation', () => {
     expect(goNextLunaticMock).toHaveBeenCalledTimes(1)
 
     // Given the user is now on the last page
-    rerender({ isFirst: false, isLast: true })
+    rerender({ isFirst: false, isLast: true, pageTag: '2' })
 
     // When the user tries to go to the next page
     await act(async () => {

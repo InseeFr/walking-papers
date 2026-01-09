@@ -27,7 +27,7 @@ import {
   computeInterrogation,
   trimCollectedData,
 } from './utils/interrogationUtils'
-import { hasBeenSent } from './utils/orchestrator'
+import { hasBeenSent, shouldDisplayWelcomeModal } from './utils/orchestrator'
 
 type OrchestratorCommonProps = {
   /** Questionnaire data consumed by Lunatic to make its components */
@@ -117,6 +117,7 @@ export default function Orchestrator(props: OrchestratorProps) {
     isFirstPage,
     isLastPage,
     initialCurrentPage,
+    pageTag,
     validateQuestionnaire,
   })
 
@@ -148,16 +149,10 @@ export default function Orchestrator(props: OrchestratorProps) {
     }
   }, [currentPage, pageTag])
 
-  const shouldDisplayWelcomeModal = () => {
-    return (
-      currentPage != '1' && currentPage !== PAGE_TYPE.END && pageTag === '1'
-    )
-  }
-
   useEffect(() => {
     return () => {
       triggerDataAndStateUpdate()
-      setOpenModal(shouldDisplayWelcomeModal())
+      setOpenModal(shouldDisplayWelcomeModal(initialState, initialCurrentPage))
     }
   }, [])
 
@@ -215,7 +210,9 @@ export default function Orchestrator(props: OrchestratorProps) {
       </div>
       <WelcomeModal
         onCancel={() => setOpenModal(false)}
-        onValidate={() => goToPage({ page: currentPage })}
+        onValidate={() =>
+          initialCurrentPage ? goToPage({ page: initialCurrentPage }) : null
+        }
         open={openModal}
         setOpen={setOpenModal}
       />
