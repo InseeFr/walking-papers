@@ -14,7 +14,7 @@
     "_format": "prettier --ignore-unknown .",
     "format": "npm run _format -- --write",
     "format:check": "npm run _format -- --list-different",
-    "prepare": "husky"
+    "prepare": "husky && vite-envs update-types"
   },
   "dependencies": {
     "@base-ui/react": "^1.0.0",
