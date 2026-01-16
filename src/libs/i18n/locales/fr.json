@@ -1,6 +1,25 @@
 {
-  "appName": "Orchestrateur de saisie papier",
-  "downloadData": "Télécharger les données",
-  "next": "Suivant",
-  "previous": "Précédent"
+  "common": {
+    "appName": "Walking Papers",
+    "downloadData": "Télécharger les données",
+    "next": "Suivant",
+    "validateData": "Valider les données saisies",
+    "previous": "Précédent",
+    "cancel": "Annuler",
+    "validate": "Valider"
+  },
+  "welcomeModal": {
+    "title": "Bienvenue dans Walking Papers",
+    "label": "Vous avez déjà commencé à renseigner le questionnaire. Souhaitez-vous reprendre là où vous en étiez ou revenir à la première page ?",
+    "backToStart": "Revenir à la première page",
+    "resume": "Reprendre là où j'en étais"
+  },
+  "endPage": {
+    "title": "Fin de la saisie",
+    "paragraph": "Page de fin."
+  },
+  "validate": {
+    "title": "Valider les données saisies",
+    "label": "Êtes-vous sûr de vouloir valider les données saisies ? Cette action est irréversible."
+  }
 }

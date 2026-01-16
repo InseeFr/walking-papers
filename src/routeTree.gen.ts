@@ -10,32 +10,43 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VisualizeIndexRouteImport } from './routes/visualize/index'
+import { Route as InterrogationsInterrogationIdRouteImport } from './routes/interrogations/$interrogationId'
 
 const VisualizeIndexRoute = VisualizeIndexRouteImport.update({
   id: '/visualize/',
   path: '/visualize/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const InterrogationsInterrogationIdRoute =
+  InterrogationsInterrogationIdRouteImport.update({
+    id: '/interrogations/$interrogationId',
+    path: '/interrogations/$interrogationId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
+  '/interrogations/$interrogationId': typeof InterrogationsInterrogationIdRoute
   '/visualize': typeof VisualizeIndexRoute
 }
 export interface FileRoutesByTo {
+  '/interrogations/$interrogationId': typeof InterrogationsInterrogationIdRoute
   '/visualize': typeof VisualizeIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/interrogations/$interrogationId': typeof InterrogationsInterrogationIdRoute
   '/visualize/': typeof VisualizeIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/visualize'
+  fullPaths: '/interrogations/$interrogationId' | '/visualize'
   fileRoutesByTo: FileRoutesByTo
-  to: '/visualize'
-  id: '__root__' | '/visualize/'
+  to: '/interrogations/$interrogationId' | '/visualize'
+  id: '__root__' | '/interrogations/$interrogationId' | '/visualize/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
+  InterrogationsInterrogationIdRoute: typeof InterrogationsInterrogationIdRoute
   VisualizeIndexRoute: typeof VisualizeIndexRoute
 }
 
@@ -48,10 +59,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VisualizeIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/interrogations/$interrogationId': {
+      id: '/interrogations/$interrogationId'
+      path: '/interrogations/$interrogationId'
+      fullPath: '/interrogations/$interrogationId'
+      preLoaderRoute: typeof InterrogationsInterrogationIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
+  InterrogationsInterrogationIdRoute: InterrogationsInterrogationIdRoute,
   VisualizeIndexRoute: VisualizeIndexRoute,
 }
 export const routeTree = rootRouteImport

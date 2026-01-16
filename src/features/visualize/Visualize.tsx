@@ -4,6 +4,7 @@ import { useQueryClient } from '@tanstack/react-query'
 
 import { nomenclatureQueryOptions } from '@/api/visualizeQueryOptions'
 import type { LunaticGetReferentiel } from '@/models/lunaticType'
+import { MODE_TYPE } from '@/models/mode'
 import { Route } from '@/routes/visualize'
 
 import Orchestrator from '../orchestrator/Orchestrator'
@@ -32,5 +33,11 @@ export const VisualizePage = memo(() => {
     )
   }
 
-  return <Orchestrator source={source} getReferentiel={getReferentiel} />
+  return (
+    <Orchestrator
+      mode={MODE_TYPE.VISUALIZE}
+      source={source}
+      getReferentiel={getReferentiel}
+    />
+  )
 })

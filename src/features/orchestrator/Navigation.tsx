@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next'
 
 import Button from '@/components/Button'
+import DialogButton from '@/components/DialogButton'
 import ArrowLeftIcon from '@/components/icons/ArrowLeftIcon'
 import ArrowRightIcon from '@/components/icons/ArrowRightIcon'
 
@@ -26,15 +27,20 @@ export default function Navigation({
         disabled={isFirstPage}
         IconLeft={<ArrowLeftIcon />}
       >
-        {t('previous')}
+        {t('common.previous')}
       </Button>
-      <Button
-        onClick={onNext}
-        disabled={isLastPage}
-        IconRight={<ArrowRightIcon />}
-      >
-        {t('next')}
-      </Button>
+      {isLastPage ? (
+        <DialogButton
+          onValidate={onNext}
+          label={t('common.validateData')}
+          title={t('validate.title')}
+          body={t('validate.label')}
+        />
+      ) : (
+        <Button onClick={onNext} IconRight={<ArrowRightIcon />}>
+          {t('common.next')}
+        </Button>
+      )}
     </div>
   )
 }

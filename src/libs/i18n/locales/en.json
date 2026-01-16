@@ -1,6 +1,25 @@
 {
-  "appName": "Orchestrateur de saisie papier",
-  "downloadData": "Download data",
-  "next": "Next",
-  "previous": "Previous"
+  "common": {
+    "appName": "Walking Papers",
+    "downloadData": "Download data",
+    "next": "Next",
+    "validateData": "Validate data",
+    "previous": "Previous",
+    "cancel": "Cancel",
+    "validate": "Validate"
+  },
+  "welcomeModal": {
+    "title": "Welcome to Walking Papers",
+    "label": "You have already started filling out the questionnaire. Would you like to resume where you left off or return to the first page?",
+    "backToStart": "Go back to the first page",
+    "resume": "Resume data entry"
+  },
+  "endPage": {
+    "title": "End Page",
+    "paragraph": "This questionnaire was completed on {{formattedDate}}."
+  },
+  "validate": {
+    "title": "Validate data",
+    "label": "Are you sure you want to validate the entered data? This action is irreversible."
+  }
 }

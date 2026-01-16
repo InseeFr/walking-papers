@@ -19,7 +19,7 @@ export default function DataDownload({ getData }: Readonly<Props>) {
 
   return (
     <Button onClick={handleClick} IconLeft={<DownloadIcon />}>
-      {t('downloadData')}
+      {t('common.downloadData')}
     </Button>
   )
 }
