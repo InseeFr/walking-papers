@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Welcome modal is now displayed correctly.
+
 ## [1.0.0](https://github.com/InseeFr/walking-papers/releases/tag/0.1.0) - 2026-01-16
 
 ### Added
