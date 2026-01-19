@@ -150,10 +150,7 @@ export default function Orchestrator(props: OrchestratorProps) {
   }, [currentPage, pageTag])
 
   useEffect(() => {
-    return () => {
-      triggerDataAndStateUpdate()
-      setOpenModal(shouldDisplayWelcomeModal(initialState, initialCurrentPage))
-    }
+    setOpenModal(shouldDisplayWelcomeModal(initialState, initialCurrentPage))
   }, [])
 
   const triggerDataAndStateUpdate = async (isLogout: boolean = false) => {
