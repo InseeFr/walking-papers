@@ -8,6 +8,10 @@ const decodedIdTokenSchema = z.object({
   preferred_username: z.string(),
 })
 
+const oidcScopes = (import.meta.env.VITE_OIDC_SCOPES || 'profile,roles').split(
+  ',',
+)
+
 export const { OidcProvider, useOidc, getOidc } =
   import.meta.env.VITE_OIDC_ENABLED === 'false'
     ? createMockReactOidc({
@@ -25,5 +29,6 @@ export const { OidcProvider, useOidc, getOidc } =
         clientId: import.meta.env.VITE_OIDC_CLIENT_ID,
         issuerUri: import.meta.env.VITE_OIDC_ISSUER,
         homeUrl: import.meta.env.BASE_URL,
+        scopes: oidcScopes,
         decodedIdTokenSchema,
       })
