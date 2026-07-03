@@ -6,7 +6,14 @@
     "validateData": "Valider les données saisies",
     "previous": "Précédent",
     "cancel": "Annuler",
-    "validate": "Valider"
+    "validate": "Valider",
+    "goToPlatineGestion": "Retourner dans Platine Gestion",
+    "version": "Version {{appVersion}} | Lunatic {{lunaticVersion}}",
+    "quit": "Quitter",
+    "leaveConfirmation": "Sauvegarder et quitter",
+    "leaveBody": "Voulez vous retourner dans Platine Gestion ? Vos données seront sauvegardées.",
+    "leaveAndSave": "Sauvegarder et quitter",
+    "saving": "Sauvegarde en cours..."
   },
   "welcomeModal": {
     "title": "Bienvenue dans Walking Papers",

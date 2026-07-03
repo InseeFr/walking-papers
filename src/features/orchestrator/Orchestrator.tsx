@@ -10,6 +10,7 @@ import '@inseefr/lunatic/main.css'
 import { assert } from 'tsafe/assert'
 
 import WelcomeModal from '@/components/WelcomeModal'
+import { useAddPreLogoutAction } from '@/hooks/usePreLogoutAction'
 import type { Interrogation } from '@/models/interrogation'
 import type { InterrogationData } from '@/models/interrogationData'
 import type { LunaticGetReferentiel } from '@/models/lunaticType'
@@ -176,6 +177,12 @@ export default function Orchestrator(props: OrchestratorProps) {
       }
     }
   }
+
+  useAddPreLogoutAction(async () => {
+    if (mode === MODE_TYPE.COLLECT && !hasBeenSent(initialState)) {
+      await triggerDataAndStateUpdate(true)
+    }
+  })
 
   return (
     <LunaticProvider>
