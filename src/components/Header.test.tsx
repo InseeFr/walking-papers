@@ -59,14 +59,14 @@ describe('Header', () => {
   })
 
   it('does not show button when interrogation match is not found', () => {
-    vi.stubEnv('VITE_PLATINE_GESTION_URL', 'https://platine-gestion.url/')
+    vi.stubEnv('VITE_PLATINE_GESTION_URL', 'https://platine-gestion.url')
     renderWithI18n(<Header />)
 
     expect(screen.queryByText('Go to Platine Gestion')).not.toBeInTheDocument()
   })
 
   it('shows button when interrogation match is found', () => {
-    vi.stubEnv('VITE_PLATINE_GESTION_URL', 'https://platine-gestion.url/')
+    vi.stubEnv('VITE_PLATINE_GESTION_URL', 'https://platine-gestion.url')
     mockUseMatch.mockReturnValue({
       params: { interrogationId: 'test-123' },
     })
@@ -77,7 +77,7 @@ describe('Header', () => {
   })
 
   it('opens dialog when button is clicked', async () => {
-    vi.stubEnv('VITE_PLATINE_GESTION_URL', 'https://platine-gestion.url/')
+    vi.stubEnv('VITE_PLATINE_GESTION_URL', 'https://platine-gestion.url')
     const user = userEvent.setup()
     mockUseMatch.mockReturnValue({
       params: { interrogationId: 'test-123' },
@@ -98,7 +98,7 @@ describe('Header', () => {
   })
 
   it('closes dialog when cancel is clicked', async () => {
-    vi.stubEnv('VITE_PLATINE_GESTION_URL', 'https://platine-gestion.url/')
+    vi.stubEnv('VITE_PLATINE_GESTION_URL', 'https://platine-gestion.url')
     const user = userEvent.setup()
     mockUseMatch.mockReturnValue({
       params: { interrogationId: 'test-123' },
@@ -115,7 +115,7 @@ describe('Header', () => {
   })
 
   it('redirects to platine on save and leave', async () => {
-    const PLATINE_URL = 'https://platine-gestion.url/'
+    const PLATINE_URL = 'https://platine-gestion.url'
     vi.stubEnv('VITE_PLATINE_GESTION_URL', PLATINE_URL)
     const user = userEvent.setup()
     mockUseMatch.mockReturnValue({
@@ -133,6 +133,6 @@ describe('Header', () => {
     await user.click(screen.getByRole('button', { name: 'Save and leave' }))
 
     expect(executePreLogoutActions).toHaveBeenCalledOnce()
-    expect(window.location.href).toBe(`${PLATINE_URL}interrogation/test-123`)
+    expect(window.location.href).toBe(`${PLATINE_URL}/interrogation/test-123`)
   })
 })

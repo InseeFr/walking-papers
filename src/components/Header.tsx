@@ -31,7 +31,7 @@ export default function Header() {
     if (!interrogationMatch?.params?.interrogationId) return
 
     await executePreLogoutActions()
-    window.location.href = `${platineGestionUrl}interrogation/${interrogationMatch.params.interrogationId}`
+    window.location.href = `${platineGestionUrl}/interrogation/${interrogationMatch.params.interrogationId}`
   }
 
   return (
