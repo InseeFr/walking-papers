@@ -10,7 +10,6 @@ import '@inseefr/lunatic/main.css'
 import { assert } from 'tsafe/assert'
 
 import WelcomeModal from '@/components/WelcomeModal'
-import { useAddPreLogoutAction } from '@/hooks/usePreLogoutAction'
 import type { Interrogation } from '@/models/interrogation'
 import type { InterrogationData } from '@/models/interrogationData'
 import type { LunaticGetReferentiel } from '@/models/lunaticType'
@@ -23,6 +22,7 @@ import Navigation from './Navigation'
 import { EndPage } from './customPages/EndPage'
 import { useInterrogation } from './hooks/useInterrogation'
 import { useNavigation } from './hooks/useNavigation'
+import { useAddPreLogoutAction } from './hooks/usePreLogoutAction'
 import { useUpdateEffect } from './hooks/useUpdateEffect'
 import {
   computeInterrogation,

@@ -7,11 +7,11 @@
     "previous": "Précédent",
     "cancel": "Annuler",
     "validate": "Valider",
-    "goToPlatineGestion": "Retourner dans Platine Gestion",
+    "leaveQuestionnaire": "Quitter le questionnaire",
     "version": "Version {{appVersion}} | Lunatic {{lunaticVersion}}",
     "quit": "Quitter",
     "leaveConfirmation": "Sauvegarder et quitter",
-    "leaveBody": "Voulez vous retourner dans Platine Gestion ? Vos données seront sauvegardées.",
+    "leaveBody": "Voulez vous quitter le questionnaire ? Vos données seront sauvegardées.",
     "leaveAndSave": "Sauvegarder et quitter",
     "saving": "Sauvegarde en cours..."
   },

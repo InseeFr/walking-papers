@@ -1,5 +1,5 @@
 /**
- * Icon of exit symbol which should be used when one wants to go back to platine gestion.
+ * Icon of exit symbol which should be used when one wants to go back to the base app.
  */
 export default function ExitIcon({
   height = '24px',

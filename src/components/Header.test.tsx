@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
-import { executePreLogoutActions } from '@/hooks/usePreLogoutAction'
+import { executePreLogoutActions } from '@/features/orchestrator/hooks/usePreLogoutAction'
 import { renderWithI18n } from '@/testing/render'
 
 import Header from './Header'
@@ -24,7 +24,7 @@ vi.mock('@tanstack/react-router', async () => {
   }
 })
 
-vi.mock('@/hooks/usePreLogoutAction', () => ({
+vi.mock('@/features/orchestrator/hooks/usePreLogoutAction', () => ({
   executePreLogoutActions: vi.fn(),
 }))
 
@@ -32,7 +32,7 @@ describe('Header', () => {
   beforeEach(() => {
     vi.stubEnv('APP_VERSION', '1.0.0')
     vi.stubEnv('LUNATIC_VERSION', '^3.6.9')
-    vi.stubEnv('VITE_PLATINE_GESTION_URL', '')
+    vi.stubEnv('VITE_BASE_EXIT_URL', '')
     mockUseMatch.mockReturnValue(undefined)
   })
 
@@ -46,7 +46,7 @@ describe('Header', () => {
     expect(getByText('Version 1.0.0 | Lunatic 3.6.9')).toBeInTheDocument()
   })
 
-  it('does not show button when platine URL is not configured', () => {
+  it('does not show button when redirect URL is not configured', () => {
     mockUseMatch.mockReturnValue({
       params: { interrogationId: 'test-123' },
     })
@@ -54,30 +54,32 @@ describe('Header', () => {
     renderWithI18n(<Header />)
 
     expect(
-      screen.queryByText('Retourner dans Platine Gestion'),
+      screen.queryByText('Leave the questionnaire'),
     ).not.toBeInTheDocument()
   })
 
   it('does not show button when interrogation match is not found', () => {
-    vi.stubEnv('VITE_PLATINE_GESTION_URL', 'https://platine-gestion.url')
+    vi.stubEnv('VITE_BASE_EXIT_URL', 'https://base-app.url')
     renderWithI18n(<Header />)
 
-    expect(screen.queryByText('Go to Platine Gestion')).not.toBeInTheDocument()
+    expect(
+      screen.queryByText('Leave the questionnaire'),
+    ).not.toBeInTheDocument()
   })
 
   it('shows button when interrogation match is found', () => {
-    vi.stubEnv('VITE_PLATINE_GESTION_URL', 'https://platine-gestion.url')
+    vi.stubEnv('VITE_BASE_EXIT_URL', 'https://base-app.url')
     mockUseMatch.mockReturnValue({
       params: { interrogationId: 'test-123' },
     })
 
     renderWithI18n(<Header />)
 
-    expect(screen.getByText('Go to Platine Gestion')).toBeInTheDocument()
+    expect(screen.getByText('Leave the questionnaire')).toBeInTheDocument()
   })
 
   it('opens dialog when button is clicked', async () => {
-    vi.stubEnv('VITE_PLATINE_GESTION_URL', 'https://platine-gestion.url')
+    vi.stubEnv('VITE_BASE_EXIT_URL', 'https://base-app.url')
     const user = userEvent.setup()
     mockUseMatch.mockReturnValue({
       params: { interrogationId: 'test-123' },
@@ -85,20 +87,20 @@ describe('Header', () => {
 
     renderWithI18n(<Header />)
 
-    await user.click(screen.getByText('Go to Platine Gestion'))
+    await user.click(screen.getByText('Leave the questionnaire'))
 
     expect(
       screen.getByRole('button', { name: 'Save and leave' }),
     ).toBeInTheDocument()
     expect(
       screen.getByText(
-        'Do you want to go back to Platine Gestion. Your data will be saved before leaving.',
+        'Do you want to leave the questionnaire? Your data will be saved before leaving.',
       ),
     ).toBeInTheDocument()
   })
 
   it('closes dialog when cancel is clicked', async () => {
-    vi.stubEnv('VITE_PLATINE_GESTION_URL', 'https://platine-gestion.url')
+    vi.stubEnv('VITE_BASE_EXIT_URL', 'https://base-app.url')
     const user = userEvent.setup()
     mockUseMatch.mockReturnValue({
       params: { interrogationId: 'test-123' },
@@ -106,7 +108,7 @@ describe('Header', () => {
 
     renderWithI18n(<Header />)
 
-    await user.click(screen.getByText('Go to Platine Gestion'))
+    await user.click(screen.getByText('Leave the questionnaire'))
     await user.click(screen.getByText('Cancel'))
 
     expect(
@@ -114,9 +116,9 @@ describe('Header', () => {
     ).not.toBeInTheDocument()
   })
 
-  it('redirects to platine on save and leave', async () => {
-    const PLATINE_URL = 'https://platine-gestion.url'
-    vi.stubEnv('VITE_PLATINE_GESTION_URL', PLATINE_URL)
+  it('redirects to base app on save and leave', async () => {
+    const BASE_URL = 'https://base-app.url'
+    vi.stubEnv('VITE_BASE_EXIT_URL', BASE_URL)
     const user = userEvent.setup()
     mockUseMatch.mockReturnValue({
       params: { interrogationId: 'test-123' },
@@ -129,10 +131,10 @@ describe('Header', () => {
 
     renderWithI18n(<Header />)
 
-    await user.click(screen.getByText('Go to Platine Gestion'))
+    await user.click(screen.getByText('Leave the questionnaire'))
     await user.click(screen.getByRole('button', { name: 'Save and leave' }))
 
     expect(executePreLogoutActions).toHaveBeenCalledOnce()
-    expect(window.location.href).toBe(`${PLATINE_URL}/interrogation/test-123`)
+    expect(window.location.href).toBe(`${BASE_URL}/interrogation/test-123`)
   })
 })
