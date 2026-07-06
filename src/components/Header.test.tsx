@@ -135,6 +135,6 @@ describe('Header', () => {
     await user.click(screen.getByRole('button', { name: 'Save and leave' }))
 
     expect(executePreLogoutActions).toHaveBeenCalledOnce()
-    expect(window.location.href).toBe(`${BASE_URL}/interrogation/test-123`)
+    expect(window.location.href).toBe(`${BASE_URL}/interrogations/test-123`)
   })
 })

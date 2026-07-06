@@ -30,7 +30,7 @@ export default function SaveAndExitButton() {
     if (!interrogationMatch?.params?.interrogationId) return
 
     await executePreLogoutActions()
-    window.location.href = `${exitUrl}/interrogation/${interrogationMatch.params.interrogationId}`
+    window.location.href = `${exitUrl}/interrogations/${interrogationMatch.params.interrogationId}`
   }
 
   if (!interrogationMatch || !exitUrl) {
