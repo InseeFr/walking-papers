@@ -6,7 +6,14 @@
     "validateData": "Valider les données saisies",
     "previous": "Précédent",
     "cancel": "Annuler",
-    "validate": "Valider"
+    "validate": "Valider",
+    "leaveQuestionnaire": "Quitter le questionnaire",
+    "version": "Version {{appVersion}} | Lunatic {{lunaticVersion}}",
+    "quit": "Quitter",
+    "leaveConfirmation": "Sauvegarder et quitter",
+    "leaveBody": "Voulez vous quitter le questionnaire ? Vos données seront sauvegardées.",
+    "leaveAndSave": "Sauvegarder et quitter",
+    "saving": "Sauvegarde en cours..."
   },
   "welcomeModal": {
     "title": "Bienvenue dans Walking Papers",

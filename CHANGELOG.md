@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add a button to leave the questionnaire and go back to the base app
+
 ### Changed
 
 - Authentication:

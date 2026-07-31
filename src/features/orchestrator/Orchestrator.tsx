@@ -22,6 +22,7 @@ import Navigation from './Navigation'
 import { EndPage } from './customPages/EndPage'
 import { useInterrogation } from './hooks/useInterrogation'
 import { useNavigation } from './hooks/useNavigation'
+import { useAddPreLogoutAction } from './hooks/usePreLogoutAction'
 import { useUpdateEffect } from './hooks/useUpdateEffect'
 import {
   computeInterrogation,
@@ -176,6 +177,12 @@ export default function Orchestrator(props: OrchestratorProps) {
       }
     }
   }
+
+  useAddPreLogoutAction(async () => {
+    if (mode === MODE_TYPE.COLLECT && !hasBeenSent(initialState)) {
+      await triggerDataAndStateUpdate(true)
+    }
+  })
 
   return (
     <LunaticProvider>

@@ -6,7 +6,14 @@
     "validateData": "Validate data",
     "previous": "Previous",
     "cancel": "Cancel",
-    "validate": "Validate"
+    "validate": "Validate",
+    "leaveQuestionnaire": "Leave the questionnaire",
+    "version": "Version {{appVersion}} | Lunatic {{lunaticVersion}}",
+    "quit": "Quit",
+    "leaveConfirmation": "Save and leave",
+    "leaveBody": "Do you want to leave the questionnaire? Your data will be saved before leaving.",
+    "leaveAndSave": "Save and leave",
+    "saving": "Saving..."
   },
   "welcomeModal": {
     "title": "Welcome to Walking Papers",
