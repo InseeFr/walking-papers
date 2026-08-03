@@ -1,7 +1,7 @@
 {
   "name": "orchestrateur-saisie-papier",
   "private": true,
-  "version": "1.0.3",
+  "version": "1.0.4",
   "type": "module",
   "packageManager": "pnpm@11.8.0",
   "scripts": {
@@ -24,12 +24,12 @@
     "@tanstack/react-router": "^1.127.9",
     "@tanstack/react-router-devtools": "^1.127.9",
     "axios": "^1.13.1",
-    "i18next": "^25.3.2",
+    "i18next": "^26.0.0",
     "i18next-browser-languagedetector": "^8.2.0",
     "oidc-spa": "^8.6.17",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-i18next": "^15.6.0",
+    "react-i18next": "^17.0.0",
     "tsafe": "^1.8.12",
     "zod": "^4.1.12"
   },

@@ -15,11 +15,12 @@ interface DialogProps {
    */
   onCancel?: () => void
   /**
-   * Function to execute if the user click on "validate".
+   * Async function to execute if the user click on "validate".
    *
    * The validate button is only present if this function is provided.
+   * While the promise is pending, buttons are disabled and the validate label shows `loadingLabel`.
    */
-  onValidate?: () => void
+  onValidate?: () => void | Promise<void>
   /** Children to render inside the dialog trigger button. */
   children?: React.ReactElement
   /** Title of the dialog. */
@@ -34,6 +35,8 @@ interface DialogProps {
   cancelLabel?: string
   /** Custom label for the validate button. */
   validateLabel?: string
+  /** Custom label for the validate button while onValidate is pending. */
+  loadingLabel?: string
 }
 
 /** Display a button that opens a confirmation dialog. */
@@ -47,12 +50,25 @@ export default function Dialog({
   setControlledOpen,
   cancelLabel,
   validateLabel,
+  loadingLabel,
 }: Readonly<DialogProps>) {
   const { t } = useTranslation()
   const [uncontrolledOpen, setUncontrolledOpen] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const open = controlledOpen ?? uncontrolledOpen
   const setOpen = setControlledOpen ?? setUncontrolledOpen
+
+  const handleValidate = async () => {
+    if (!onValidate) return
+    setIsLoading(true)
+    try {
+      await onValidate()
+    } finally {
+      setIsLoading(false)
+      setOpen(false)
+    }
+  }
 
   return (
     <UIDialog.Root open={open} onOpenChange={setOpen}>
@@ -68,23 +84,27 @@ export default function Dialog({
           </UIDialog.Description>
           <div className="flex justify-end gap-4">
             {onCancel ? (
-              <Button onClick={onCancel}>
+              <Button onClick={onCancel} disabled={isLoading}>
                 {cancelLabel || t('common.cancel')}
               </Button>
             ) : (
               <UIDialog.Close
-                render={<Button>{cancelLabel || t('common.cancel')}</Button>}
+                render={
+                  <Button disabled={isLoading}>
+                    {cancelLabel || t('common.cancel')}
+                  </Button>
+                }
               />
             )}
             {onValidate ? (
               <Button
-                onClick={() => {
-                  onValidate()
-                  setOpen(false)
-                }}
+                onClick={handleValidate}
                 buttonStyle={ButtonStyle.Primary}
+                disabled={isLoading}
               >
-                {validateLabel || t('common.validate')}
+                {isLoading
+                  ? loadingLabel || validateLabel || t('common.validate')
+                  : validateLabel || t('common.validate')}
               </Button>
             ) : null}
           </div>

@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.4](https://github.com/InseeFr/walking-papers/releases/tag/1.0.4) - 2026-07-31
+
+### Added
+
+- Add a button to leave the questionnaire and go back to the base app
+
 ### Changed
 
 - Authentication:

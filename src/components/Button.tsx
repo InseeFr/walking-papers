@@ -1,6 +1,7 @@
 export enum ButtonStyle {
   Primary,
   Secondary,
+  Transparent,
 }
 
 export enum ButtonSize {
@@ -39,7 +40,9 @@ export default function Button({
         ${
           buttonStyle === ButtonStyle.Primary
             ? 'bg-primary text-negative disabled:bg-primary-disabled hover:enabled:bg-primary-accent active:enabled:bg-primary-active'
-            : 'bg-white text-primary fill-action-primary disabled:bg-disabled disabled:text-disabled hover:enabled:bg-accent active:enabled:bg-active disabled:border-default border-primary'
+            : buttonStyle === ButtonStyle.Transparent
+              ? 'bg-transparent text-negative fill-current border-transparent hover:enabled:bg-white/10 active:enabled:bg-white/20 disabled:opacity-50'
+              : 'bg-white text-primary fill-action-primary disabled:bg-disabled disabled:text-disabled hover:enabled:bg-accent active:enabled:bg-active disabled:border-default border-primary'
         } ${buttonSize === ButtonSize.md ? 'px-4 py-3 min-w-40' : 'px-2 py-1'}`}
       {...props}
     >
