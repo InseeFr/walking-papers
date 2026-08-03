@@ -27,8 +27,8 @@ importers:
         specifier: ^1.127.9
         version: 1.167.0(@tanstack/react-router@1.170.8(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(@tanstack/router-core@1.171.8)(csstype@3.2.3)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       axios:
-        specifier: ^1.16.0
-        version: 1.16.1
+        specifier: ^1.18.1
+        version: 1.19.0
       i18next:
         specifier: ^25.3.2
         version: 25.10.10(typescript@5.9.3)
@@ -2833,10 +2833,10 @@ packages:
       }
     engines: { node: '>= 0.4' }
 
-  axios@1.16.1:
+  axios@1.19.0:
     resolution:
       {
-        integrity: sha512-caYkukvroVPO8KrzuJEb50Hm07KwfBZPEC3VeFHTsqWHvKTsy54hjJz9BS/cdaypROE2rH6xvm9mHX4fgWkr3A==,
+        integrity: sha512-ht/iuYZXEjFxLH/Hkezgd7m6JKlHHXEUSneaDz8uZe1Gj5QZtCnpyDsckvAiEnT89OEbCLmnte4R4sn7P0EKFw==,
       }
 
   babel-dead-code-elimination@1.0.12:
@@ -9069,7 +9069,7 @@ snapshots:
     dependencies:
       possible-typed-array-names: 1.1.0
 
-  axios@1.16.1:
+  axios@1.19.0:
     dependencies:
       follow-redirects: 1.16.0
       form-data: 4.0.6
