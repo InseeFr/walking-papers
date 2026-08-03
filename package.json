@@ -24,7 +24,7 @@
     "@tanstack/react-router": "^1.127.9",
     "@tanstack/react-router-devtools": "^1.127.9",
     "axios": "^1.13.1",
-    "i18next": "^25.3.2",
+    "i18next": "^26.0.0",
     "i18next-browser-languagedetector": "^8.2.0",
     "oidc-spa": "^8.6.17",
     "react": "^19.1.0",
