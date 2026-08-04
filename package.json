@@ -15,7 +15,8 @@
     "_format": "prettier --ignore-unknown .",
     "format": "pnpm run _format -- --write",
     "format:check": "pnpm run _format -- --list-different",
-    "prepare": "husky && vite-envs update-types"
+    "prepare": "husky && vite-envs update-types",
+    "generate-api": "orval"
   },
   "dependencies": {
     "@base-ui/react": "^1.0.0",
@@ -54,7 +55,7 @@
     "jsdom": "^27.0.0",
     "lint-staged": "^17.0.0",
     "nock": "^14.0.5",
-    "orval": "^7.17.0",
+    "orval": "^8.0.0",
     "prettier": "3.9.6",
     "tailwindcss": "^4.1.11",
     "typescript": "~5.9.0",
