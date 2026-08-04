@@ -15,7 +15,8 @@
     "_format": "prettier --ignore-unknown .",
     "format": "pnpm run _format -- --write",
     "format:check": "pnpm run _format -- --list-different",
-    "prepare": "husky && vite-envs update-types"
+    "prepare": "husky && vite-envs update-types",
+    "generate-api": "orval"
   },
   "dependencies": {
     "@base-ui/react": "^1.0.0",
