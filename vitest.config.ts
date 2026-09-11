@@ -13,6 +13,7 @@ export default defineConfig(
         include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
         setupFiles: ['src/testing/setup.ts'],
         coverage: {
+          provider: 'v8',
           reporter: ['text', 'lcov'],
         },
       },
