@@ -1,9 +1,9 @@
 {
   "name": "orchestrateur-saisie-papier",
   "private": true,
-  "version": "1.0.8",
+  "version": "1.0.10",
   "type": "module",
-  "packageManager": "pnpm@11.22.0",
+  "packageManager": "pnpm@11.28.4",
   "scripts": {
     "dev": "vite",
     "test": "vitest run",
