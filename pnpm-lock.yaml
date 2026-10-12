@@ -40,8 +40,8 @@ importers:
         specifier: ^8.2.0
         version: 8.2.1
       oidc-spa:
-        specifier: ^8.6.17
-        version: 8.7.13(@tanstack/react-router@1.170.31(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.18)(react@19.2.8)
+        specifier: ^10.0.0
+        version: 10.2.18(@tanstack/react-router@1.170.31(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.18)(react@19.2.8)
       react:
         specifier: ^19.1.0
         version: 19.2.8
@@ -1452,11 +1452,6 @@ packages:
 
   ajv-formats@3.0.1:
     resolution: {integrity: sha512-8iUql50EUR+uUcdRQ3HDqa6EVyo3docL8g5WJ3FNcWmu62IbkGUue/pEyLBW8VGKKucTPgqeks4fIU1DA4yowQ==}
-    peerDependencies:
-      ajv: ^8.0.0
-    peerDependenciesMeta:
-      ajv:
-        optional: true
 
   ajv@6.15.0:
     resolution: {integrity: sha512-fgFx7Hfoq60ytK2c7DhnF8jIvzYgOMxfugjLOSMHjLIPgenqa7S7oaagATUq99mV6IYvN2tRmC0wnTYX6iPbMw==}
@@ -2802,14 +2797,15 @@ packages:
     resolution: {integrity: sha512-4a+OsYv9UktOJKE+l1A4OufDgdRF9PifWj+tJnHURo/P+WOxpG4GzUFL9qCalmWauao6ogiG+QvnCovwPoyAWA==}
     engines: {node: '>=12.20.0'}
 
-  oidc-spa@8.7.13:
-    resolution: {integrity: sha512-JqlZe7f7pnAAenPZ0AIA14eIdKRrBPKbpGH5w8JxC6dTOquR4FG1IsrQTEYkHsLBr09TKVT5g6K5PoZ2qk51xA==}
+  oidc-spa@10.2.18:
+    resolution: {integrity: sha512-2Nq9mUHRxoPiCQEy586Xrxmw9o2zamgA5y24q4wbdco5R9WRx0v1qZqFtqEJ/iRJpVaOC9wDy3Gk1bYDDMu1Dg==}
     peerDependencies:
       '@angular/common': '*'
       '@angular/core': '*'
       '@angular/router': '*'
+      '@nuxt/kit': '*'
       '@tanstack/react-router': '*'
-      '@tanstack/react-start': '*'
+      '@tanstack/react-start': '>=1.168.25'
       '@types/react': '*'
       react: '*'
       rxjs: '*'
@@ -2819,6 +2815,8 @@ packages:
       '@angular/core':
         optional: true
       '@angular/router':
+        optional: true
+      '@nuxt/kit':
         optional: true
       '@tanstack/react-router':
         optional: true
@@ -4402,7 +4400,7 @@ snapshots:
       '@scalar/openapi-upgrader': 0.2.13
       ajv: 8.20.0
       ajv-draft-04: 1.0.0(ajv@8.20.0)
-      ajv-formats: 3.0.1(ajv@8.20.0)
+      ajv-formats: 3.0.1
       jsonpointer: 5.0.1
       leven: 4.1.0
       yaml: 2.9.0
@@ -4867,8 +4865,8 @@ snapshots:
     optionalDependencies:
       ajv: 8.20.0
 
-  ajv-formats@3.0.1(ajv@8.20.0):
-    optionalDependencies:
+  ajv-formats@3.0.1:
+    dependencies:
       ajv: 8.20.0
 
   ajv@6.15.0:
@@ -6484,7 +6482,7 @@ snapshots:
 
   obug@2.1.4: {}
 
-  oidc-spa@8.7.13(@tanstack/react-router@1.170.31(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.18)(react@19.2.8):
+  oidc-spa@10.2.18(@tanstack/react-router@1.170.31(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.18)(react@19.2.8):
     optionalDependencies:
       '@tanstack/react-router': 1.170.31(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@types/react': 19.2.18
