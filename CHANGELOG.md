@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0](https://github.com/InseeFr/walking-papers/releases/tag/1.1.0) - 2026-11-10
+
+### Added
+
+- Enable filtering of components based on external variables only. Added by Lunatic 4.0.0
+
+### Fixed
+
+- dependencies: fix cves
+
 ## [1.0.12](https://github.com/InseeFr/walking-papers/releases/tag/1.0.12) - 2026-10-26
 
 ### Fixed

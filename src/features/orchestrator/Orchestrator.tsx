@@ -55,8 +55,7 @@ type OrchestratorCollectProps = OrchestratorCommonProps & {
 }
 
 export type OrchestratorProps =
-  | OrchestratorVisualizeProps
-  | OrchestratorCollectProps
+  OrchestratorVisualizeProps | OrchestratorCollectProps
 
 export default function Orchestrator(props: OrchestratorProps) {
   const { source, getReferentiel, mode } = props
@@ -87,7 +86,7 @@ export default function Orchestrator(props: OrchestratorProps) {
   } = useLunatic(source, initialInterrogation?.data, {
     getReferentiel,
     autoSuggesterLoading: true,
-    disableFilters: true,
+    activeFilters: 'EXTERNAL',
     disableFiltersDescription: false,
     trackChanges: true,
     componentsOptions: { detailAlwaysDisplayed: true },
