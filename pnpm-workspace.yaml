@@ -4,7 +4,7 @@ allowBuilds:
 minimumReleaseAge: 0
 overrides:
   brace-expansion@<1.1.16: ^1.1.16
-  brace-expansion@<1.1.17: ^1.1.17
+  brace-expansion@<1.1.17: ^5.0.0
   brace-expansion@<1.1.18: ^1.1.18
   markdown-it@<14.3.2: ^14.3.2
   markdown-it@>=14.1.0 <14.3.3: ^14.3.3
