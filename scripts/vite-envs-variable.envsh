@@ -1,0 +1,7 @@
+#!/bin/sh
+
+/usr/share/nginx/html/vite-envs.sh
+
+export VITE_API_URL="${VITE_API_URL:-}"
+export VITE_OIDC_ISSUER="${VITE_OIDC_ISSUER:-}"
+export VITE_BASE_EXIT_URL="${VITE_BASE_EXIT_URL:-}"

@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0](https://gitlab.insee.fr/filiere-enquete/concevoir-traiter/applications/concevoir/questionnaire-papier-ui/-/tags/1.2.0) - 2026-11-27
+
+### Added
+
+- Added missing HTTP headers to improve security (CSP, X-Frame-Options, Cross-Origin-Resource-Policy, X-Content-Type-Options, Referrer-Policy, Strict-Transport-Security)
+
+## [1.1.1](https://gitlab.insee.fr/filiere-enquete/concevoir-traiter/applications/concevoir/questionnaire-papier-ui/-/tags/1.1.1) - 2026-11-25
+
+### Changed
+
+- Update nginx/nginx-unprivileged version
+
 ## [1.1.0](https://github.com/InseeFr/walking-papers/releases/tag/1.1.0) - 2026-11-10
 
 ### Added
